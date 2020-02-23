@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="MainPreviewCell" rowHeight="101" id="acZ-dC-Nl8" customClass="MainPreviewCell" customModule="Primes" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="acZ-dC-Nl8" id="E9X-cZ-3HK">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Start time:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jb5-ju-Iip">
+                        <rect key="frame" x="10" y="10" width="72" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Upper bound: 100" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mFZ-g5-tGF">
+                        <rect key="frame" x="10" y="33" width="124" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Threads cound: 10" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2As-E9-vvV">
+                        <rect key="frame" x="10" y="56" width="128" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Elapsed time: 24.78 sec" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0hZ-7L-05C">
+                        <rect key="frame" x="10" y="79" width="164" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstItem="Jb5-ju-Iip" firstAttribute="leading" secondItem="E9X-cZ-3HK" secondAttribute="leading" constant="10" id="3ap-hq-NvA"/>
+                    <constraint firstItem="2As-E9-vvV" firstAttribute="leading" secondItem="E9X-cZ-3HK" secondAttribute="leading" constant="10" id="6Pq-ub-rIb"/>
+                    <constraint firstItem="mFZ-g5-tGF" firstAttribute="leading" secondItem="E9X-cZ-3HK" secondAttribute="leading" constant="10" id="Cjn-ZF-Joa"/>
+                    <constraint firstItem="0hZ-7L-05C" firstAttribute="leading" secondItem="E9X-cZ-3HK" secondAttribute="leading" constant="10" id="S8D-WQ-8aP"/>
+                    <constraint firstItem="Jb5-ju-Iip" firstAttribute="top" secondItem="E9X-cZ-3HK" secondAttribute="top" constant="10" id="WRR-Og-MIF"/>
+                    <constraint firstItem="mFZ-g5-tGF" firstAttribute="top" secondItem="Jb5-ju-Iip" secondAttribute="bottom" constant="5" id="ogd-w7-Las"/>
+                    <constraint firstItem="2As-E9-vvV" firstAttribute="top" secondItem="mFZ-g5-tGF" secondAttribute="bottom" constant="5" id="tUh-Ny-lPL"/>
+                    <constraint firstItem="0hZ-7L-05C" firstAttribute="top" secondItem="2As-E9-vvV" secondAttribute="bottom" constant="5" id="xM9-8l-BkX"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <connections>
+                <outlet property="elapsedTimeLabel" destination="0hZ-7L-05C" id="dBG-rr-Lrw"/>
+                <outlet property="startTimeLabel" destination="Jb5-ju-Iip" id="PpV-We-Vqt"/>
+                <outlet property="threadsCountLabel" destination="2As-E9-vvV" id="EQ5-KH-RWh"/>
+                <outlet property="upperBoundLabel" destination="mFZ-g5-tGF" id="R9c-kS-36o"/>
+            </connections>
+            <point key="canvasLocation" x="140.57971014492756" y="205.91517857142856"/>
+        </tableViewCell>
+    </objects>
+</document>

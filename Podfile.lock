@@ -1,0 +1,24 @@
+PODS:
+  - RIBs (0.9.1):
+    - RxSwift (~> 4.0)
+  - RxSwift (4.5.0)
+  - TransitionButton (0.5.2)
+
+DEPENDENCIES:
+  - RIBs (~> 0.9)
+  - TransitionButton
+
+SPEC REPOS:
+  trunk:
+    - RIBs
+    - RxSwift
+    - TransitionButton
+
+SPEC CHECKSUMS:
+  RIBs: 879184fbca567425c488d6b3d14a9c5abfbf9d47
+  RxSwift: f172070dfd1a93d70a9ab97a5a01166206e1c575
+  TransitionButton: fb271583d9c9e4bb116b97103047e5157653f233
+
+PODFILE CHECKSUM: 408cba20f528f4cee20191a1ba4595d2d6fd3d24
+
+COCOAPODS: 1.8.4
