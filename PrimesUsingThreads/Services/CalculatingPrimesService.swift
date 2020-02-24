@@ -9,7 +9,7 @@
 import Foundation
 
 protocol CalculatingPrimesDelagate {
-    func taskCompleted(elapsedTime: Double)
+    func taskCompleted(result: MainPreviewModel)
 }
 
 protocol CalculatingPrimesServicing {
@@ -20,62 +20,47 @@ protocol CalculatingPrimesServicing {
 final class CalculatingPrimesService: CalculatingPrimesServicing {
     private var delegates: [CalculatingPrimesDelagate] = []
     private var threadPool: ThreadPool!
+    private var isBusy: Bool = false
 
-    init() {
-
-    }
+    init() { }
 
     func addListener(_ delegate: CalculatingPrimesDelagate) {
         delegates.append(delegate)
     }
 
+    var chunks: Int = 0 {
+        didSet {
+            remainingTasks = chunks
+        }
+    }
+
     func calculatePrimesUsingThreadPoolUp(to limit: Int, threadCount: Int) {
+        guard !isBusy else { return }
+        isBusy = true
+
         threadPool = ThreadPool(threadCount: threadCount, threadPriority: 10.0)
 
         let chunkSize: Int = 100;
-        let chunks = (limit - 2) / chunkSize;
+        chunks = (limit - 2) / chunkSize;
 
         for i in 0..<chunks {
             let chunkStart = 2 + i * chunkSize;
             let chunkEnd = i == (chunks - 1) ? limit : chunkStart + chunkSize;
-            print("\(chunkStart)...\(chunkEnd)")
             threadPool.addTask(ThreadPoolTask({ _ in
-                var arr: [Int] = []
+                var portion: [Int] = []
                 for number in chunkStart..<chunkEnd {
-                    if self.isPrime(number: number) {
-                        arr.append(number)
+                    if isPrime(number: number) {
+                        portion.append(number)
                     }
                 }
-                self.addData(arr)
-                self.increase()
+                self.addData(portion)
             }))
         }
-       // allDone.WaitOne();
     }
 
-    private func isPrime(number: Int) -> Bool {
-        if (number == 2) {
-            return true
-        } else if (number % 2 == 0) {
-            return false
-        }
-
-        var divisor: Int = 3
-        while (divisor < (number / 2)) {
-            if (number % divisor == 0) {
-                return false
-            }
-
-            divisor += 2
-        }
-
-        return true
-    }
-
-    private let tasksCompletedCounterLocker = NSLock()
     private let dataLocker = NSLock()
 
-    private var tasksCompletedCounter: Int = 0
+    private var remainingTasks: Int = 0
     private var primes: [Int] = []
 
     private var start: UInt64?
@@ -84,14 +69,10 @@ final class CalculatingPrimesService: CalculatingPrimesServicing {
     private func addData(_ portion: [Int]) {
         dataLocker.lock()
         primes.append(contentsOf: portion)
-        dataLocker.unlock()
-    }
 
-    private func increase() {
-        tasksCompletedCounterLocker.lock()
-        tasksCompletedCounter += 1
+        remainingTasks -= 1
 
-        if tasksCompletedCounter == 9999 {
+        if remainingTasks == 0 {
             print(primes.sorted())
             print(primes.count)
 
@@ -101,14 +82,43 @@ final class CalculatingPrimesService: CalculatingPrimesServicing {
                 print("Threads: \(elapsedTime) sec")
             }
 
+            let result = MainPreviewModel(startTime: Date(),
+                                          upperBound: 10,
+                                          threadsCount: 10,
+                                          elapsedTime: elapsedTime)
             delegates.forEach {
-                $0.taskCompleted(elapsedTime: elapsedTime)
+                $0.taskCompleted(result: result)
             }
 
-        } else if tasksCompletedCounter == 1 {
+            primes.removeAll()
+            start = nil
+            end = nil
+            isBusy = false
+
+        } else if remainingTasks == chunks - 1 {
             start = DispatchTime.now().uptimeNanoseconds
         }
 
-        tasksCompletedCounterLocker.unlock()
+        dataLocker.unlock()
     }
+}
+
+fileprivate func isPrime(number: Int) -> Bool {
+    if (number == 2) {
+        return true
+    } else if (number % 2 == 0) {
+        return false
+    }
+
+    let upperBound: Int = number / 2
+    var divisor: Int = 3
+    while (divisor < upperBound) {
+        if (number % divisor == 0) {
+            return false
+        }
+
+        divisor += 2
+    }
+
+    return true
 }
