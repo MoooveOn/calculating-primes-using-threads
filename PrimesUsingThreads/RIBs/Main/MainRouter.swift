@@ -18,8 +18,6 @@ protocol MainViewControllable: ViewControllable {
 }
 
 final class MainRouter: ViewableRouter<MainInteractable, MainViewControllable>, MainRouting {
-
-    // TODO: Constructor inject child builder protocols to allow building children.
     override init(interactor: MainInteractable, viewController: MainViewControllable) {
         super.init(interactor: interactor, viewController: viewController)
         interactor.router = self

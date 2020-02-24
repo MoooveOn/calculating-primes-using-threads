@@ -15,12 +15,14 @@ protocol MainRouting: ViewableRouting {
 
 protocol MainPresentable: Presentable {
     var listener: MainPresentableListener? { get set }
+    var inProgress: Bool { get set }
 
     func cleanCacheFinished()
+    func insertRow(at indexPath: IndexPath)
 }
 
 protocol MainListener: class {
-    // TODO: Declare methods the interactor can invoke to communicate with other RIBs.
+
 }
 
 final class MainInteractor: PresentableInteractor<MainPresentable>, MainInteractable {
@@ -28,6 +30,14 @@ final class MainInteractor: PresentableInteractor<MainPresentable>, MainInteract
     weak var router: MainRouting?
     weak var listener: MainListener?
     private var calculatingPrimesService: CalculatingPrimesServicing
+
+    var cacheRecords: [MainPreviewModel] = [
+            MainPreviewModel(startTime: Date().addingTimeInterval(60), upperBound: 10, threadsCount: 10, elapsedTime: 12.678),
+            MainPreviewModel(startTime: Date().addingTimeInterval(600), upperBound: 10, threadsCount: 7, elapsedTime: 0.678),
+            MainPreviewModel(startTime: Date(), upperBound: 100000, threadsCount: 9, elapsedTime: 3.678),
+            MainPreviewModel(startTime: Date().addingTimeInterval(120), upperBound: 3, threadsCount: 8, elapsedTime: 10.678),
+            MainPreviewModel(startTime: Date().addingTimeInterval(30), upperBound: 2, threadsCount: 7, elapsedTime: 7.678)
+    ]
 
     init(presenter: MainPresentable,
          calculatingPrimesService: CalculatingPrimesServicing) {
@@ -52,16 +62,6 @@ final class MainInteractor: PresentableInteractor<MainPresentable>, MainInteract
 // MARK: - MainPresentableListener
 
 extension MainInteractor: MainPresentableListener {
-    var cacheRecords: [MainPreviewModel] {
-        return [
-            MainPreviewModel(startTime: Date().addingTimeInterval(60), upperBound: 10, threadsCount: 10, elapsedTime: 12.678),
-            MainPreviewModel(startTime: Date().addingTimeInterval(600), upperBound: 10, threadsCount: 7, elapsedTime: 0.678),
-            MainPreviewModel(startTime: Date(), upperBound: 100000, threadsCount: 9, elapsedTime: 3.678),
-            MainPreviewModel(startTime: Date().addingTimeInterval(120), upperBound: 3, threadsCount: 8, elapsedTime: 10.678),
-            MainPreviewModel(startTime: Date().addingTimeInterval(30), upperBound: 2, threadsCount: 7, elapsedTime: 7.678)
-        ]
-    }
-
     func onStartButtonAction(upperBound: Int, threadsCount: Int) {
         calculatingPrimesService.calculatePrimesUsingThreadPoolUp(to: upperBound, threadCount: threadsCount)
     }
@@ -75,8 +75,14 @@ extension MainInteractor: MainPresentableListener {
 // MARK: - CalculatingPrimesDelagate
 
 extension MainInteractor: CalculatingPrimesDelagate {
-    func taskCompleted(elapsedTime: Double) {
-        print("Done with \(elapsedTime) sec")
+    func taskCompleted(result: MainPreviewModel) {
         // when finished - save & update table
+        cacheRecords.append(result)
+
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.presenter.insertRow(at: IndexPath(row: self.cacheRecords.count - 1, section: 0))
+            self.presenter.inProgress = false
+        }
     }
 }

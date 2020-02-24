@@ -49,7 +49,7 @@ final class MainViewController: UIViewController, MainViewControllable {
     }
 
     weak var listener: MainPresentableListener?
-    fileprivate var inProgress: Bool = false {
+    var inProgress: Bool = false {
         didSet {
             if inProgress {
                 startButton.startAnimation()
@@ -106,6 +106,10 @@ extension MainViewController {
 extension MainViewController: MainPresentable {
     func cleanCacheFinished() {
         cleanCacheButton.stopAnimation(animationStyle: .normal, revertAfterDelay: 0.0, completion: nil)
+    }
+
+    func insertRow(at indexPath: IndexPath) {
+        tableView.insertRows(at: [indexPath], with: .automatic)
     }
 }
 

@@ -22,7 +22,7 @@ class MainPreviewCell: UITableViewCell, ConfigurableCell, NibRegistrableCell {
         startTimeLabel.text = #"Start time: \#(item.startTime.beautyStyle)"#
         upperBoundLabel.text = #"Upper bound: \#(item.upperBound)"#
         threadsCountLabel.text = #"Threads count: \#(item.threadsCount)"#
-        let roundedElapsedTime = round(item.elapsedTime * 100) / 100
+        let roundedElapsedTime = round(item.elapsedTime * 1000) / 1000
         elapsedTimeLabel.text = #"Elapsed time: \#(roundedElapsedTime) sec"#
     }
 }
