@@ -14,6 +14,7 @@ protocol ServiceDependency: Dependency {
 
 protocol ServiceBuildable {
     var calculatingPrimesService: CalculatingPrimesServicing { get }
+    var coreDataService: CoreDataServicing { get }
 }
 
 final class ServiceBuilder: Builder<ServiceDependency>, ServiceBuildable {
@@ -22,6 +23,8 @@ final class ServiceBuilder: Builder<ServiceDependency>, ServiceBuildable {
 
     var calculatingPrimesService: CalculatingPrimesServicing = CalculatingPrimesService()
 
-    // MARK: - CoreData Manager
+    // MARK: - CoreDataService
+
+    var coreDataService: CoreDataServicing = CoreDataService()
 
 }

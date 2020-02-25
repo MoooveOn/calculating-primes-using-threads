@@ -10,7 +10,7 @@ import Foundation
 
 struct MainPreviewModel {
     let startTime: Date
-    let upperBound: Int
-    let threadsCount: Int
+    let upperBound: Int64
+    let threadsCount: Int16
     let elapsedTime: Double
 }

@@ -97,7 +97,7 @@ public func ==(lhs: ThreadPoolQueue, rhs: ThreadPoolQueue) -> Bool {
                     task = queue.popFirstTask()
                     threadPool.takenQueues.append(queue)
 
-                    if let index = threadPool.queues.index(of: queue) {
+                    if let index = threadPool.queues.firstIndex(of: queue) {
                         threadPool.queues.remove(at: index)
                     }
 

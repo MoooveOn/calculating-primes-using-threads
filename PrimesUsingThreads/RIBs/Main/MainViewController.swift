@@ -105,6 +105,7 @@ extension MainViewController {
 
 extension MainViewController: MainPresentable {
     func cleanCacheFinished() {
+        tableView.reloadData()
         cleanCacheButton.stopAnimation(animationStyle: .normal, revertAfterDelay: 0.0, completion: nil)
     }
 

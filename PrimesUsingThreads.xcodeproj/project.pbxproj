@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		724400F024047D12008885D0 /* Primes.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 724400EE24047D12008885D0 /* Primes.xcdatamodeld */; };
+		724400F224047F68008885D0 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724400F124047F68008885D0 /* CoreDataStack.swift */; };
+		7256151524055772002B2CDC /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7256151424055772002B2CDC /* CoreDataService.swift */; };
+		7256151724056781002B2CDC /* PrimesCalculating+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7256151624056780002B2CDC /* PrimesCalculating+CoreDataClass.swift */; };
+		7256151924056784002B2CDC /* PrimesCalculating+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7256151824056784002B2CDC /* PrimesCalculating+CoreDataProperties.swift */; };
 		72AE73BB2401D058003423FA /* Atomic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72AE73BA2401D058003423FA /* Atomic.swift */; };
 		72AE73C024028A78003423FA /* MainPreviewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72AE73BF24028A78003423FA /* MainPreviewCell.xib */; };
 		72AE73C224028A84003423FA /* MainPreviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72AE73C124028A84003423FA /* MainPreviewCell.swift */; };
@@ -38,6 +43,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		724400EF24047D12008885D0 /* Primes.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Primes.xcdatamodel; sourceTree = "<group>"; };
+		724400F124047F68008885D0 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		7256151424055772002B2CDC /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
+		7256151624056780002B2CDC /* PrimesCalculating+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "PrimesCalculating+CoreDataClass.swift"; path = "/Users/pavelselivanov/Desktop/Projects-AI/Prime numbers with ThreadPool and cashing/PrimesUsingThreads/PrimesUsingThreads/Resources/PrimesCalculating+CoreDataClass.swift"; sourceTree = "<absolute>"; };
+		7256151824056784002B2CDC /* PrimesCalculating+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "PrimesCalculating+CoreDataProperties.swift"; path = "/Users/pavelselivanov/Desktop/Projects-AI/Prime numbers with ThreadPool and cashing/PrimesUsingThreads/PrimesUsingThreads/Resources/PrimesCalculating+CoreDataProperties.swift"; sourceTree = "<absolute>"; };
 		72AE73BA2401D058003423FA /* Atomic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Atomic.swift; sourceTree = "<group>"; };
 		72AE73BF24028A78003423FA /* MainPreviewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainPreviewCell.xib; sourceTree = "<group>"; };
 		72AE73C124028A84003423FA /* MainPreviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPreviewCell.swift; sourceTree = "<group>"; };
@@ -90,6 +100,25 @@
 				C87A48F66B5BE4F87BFD3E16 /* Pods_PrimesUsingThreads.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		724400ED24047C7E008885D0 /* CoreDataService */ = {
+			isa = PBXGroup;
+			children = (
+				7256151A2405684A002B2CDC /* CoreDataEntities */,
+				724400F124047F68008885D0 /* CoreDataStack.swift */,
+				7256151424055772002B2CDC /* CoreDataService.swift */,
+			);
+			path = CoreDataService;
+			sourceTree = "<group>";
+		};
+		7256151A2405684A002B2CDC /* CoreDataEntities */ = {
+			isa = PBXGroup;
+			children = (
+				7256151624056780002B2CDC /* PrimesCalculating+CoreDataClass.swift */,
+				7256151824056784002B2CDC /* PrimesCalculating+CoreDataProperties.swift */,
+			);
+			path = CoreDataEntities;
 			sourceTree = "<group>";
 		};
 		72AE73B92401D044003423FA /* Utils */ = {
@@ -184,6 +213,7 @@
 			isa = PBXGroup;
 			children = (
 				72AFAAF8240163F60020507E /* Info.plist */,
+				724400EE24047D12008885D0 /* Primes.xcdatamodeld */,
 				72AFAAF3240163F60020507E /* Assets.xcassets */,
 			);
 			path = Resources;
@@ -212,6 +242,7 @@
 		72F8E55324016B69005E3A3F /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				724400ED24047C7E008885D0 /* CoreDataService */,
 				72F8E55424016BAD005E3A3F /* Builder */,
 				72AE73E02403218B003423FA /* CalculatingPrimesService.swift */,
 			);
@@ -380,6 +411,7 @@
 				72F8E5452401688D005E3A3F /* AppComponent.swift in Sources */,
 				72F8E54B2401692C005E3A3F /* RootRouter.swift in Sources */,
 				72F8E55F24016D33005E3A3F /* MainBuilder.swift in Sources */,
+				7256151924056784002B2CDC /* PrimesCalculating+CoreDataProperties.swift in Sources */,
 				72F8E56424016E6C005E3A3F /* RootComponent+Main.swift in Sources */,
 				72AE73DD2402B20D003423FA /* Date+Utils.swift in Sources */,
 				72AE73C224028A84003423FA /* MainPreviewCell.swift in Sources */,
@@ -390,10 +422,14 @@
 				72AFAAED240163F50020507E /* AppDelegate.swift in Sources */,
 				72AE73DA2402A68C003423FA /* NibRegistrableCell.swift in Sources */,
 				72AE73C524028ABF003423FA /* MainPreviewModel.swift in Sources */,
+				7256151724056781002B2CDC /* PrimesCalculating+CoreDataClass.swift in Sources */,
+				724400F224047F68008885D0 /* CoreDataStack.swift in Sources */,
 				72F8E55224016AB0005E3A3F /* ViewableRouter+Extension.swift in Sources */,
+				7256151524055772002B2CDC /* CoreDataService.swift in Sources */,
 				72F8E55624016BC1005E3A3F /* ServiceBuilder.swift in Sources */,
 				72F8E55D24016D33005E3A3F /* MainRouter.swift in Sources */,
 				72F8E55E24016D33005E3A3F /* MainViewController.swift in Sources */,
+				724400F024047D12008885D0 /* Primes.xcdatamodeld in Sources */,
 				72AE73DF2402B514003423FA /* ThreadPool.swift in Sources */,
 				72AE73BB2401D058003423FA /* Atomic.swift in Sources */,
 				72F8E56024016D33005E3A3F /* MainInteractor.swift in Sources */,
@@ -590,6 +626,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		724400EE24047D12008885D0 /* Primes.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				724400EF24047D12008885D0 /* Primes.xcdatamodel */,
+			);
+			currentVersion = 724400EF24047D12008885D0 /* Primes.xcdatamodel */;
+			path = Primes.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 72AFAAE1240163F50020507E /* Project object */;
 }

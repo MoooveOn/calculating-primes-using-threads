@@ -33,7 +33,8 @@ final class MainBuilder: Builder<MainDependency>, MainBuildable {
         let component = MainComponent(dependency: dependency)
         let viewController = MainViewController()
         let interactor = MainInteractor(presenter: viewController,
-                                        calculatingPrimesService: dependency.serviceBuilder.calculatingPrimesService)
+                                        calculatingPrimesService: dependency.serviceBuilder.calculatingPrimesService,
+                                        coreDataService: dependency.serviceBuilder.coreDataService)
         interactor.listener = listener
         return MainRouter(interactor: interactor, viewController: viewController)
     }

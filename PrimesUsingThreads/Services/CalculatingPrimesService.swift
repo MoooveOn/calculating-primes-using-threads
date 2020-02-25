@@ -47,10 +47,10 @@ final class CalculatingPrimesService: CalculatingPrimesServicing {
             let chunkStart = 2 + i * chunkSize;
             let chunkEnd = i == (chunks - 1) ? limit : chunkStart + chunkSize;
             threadPool.addTask(ThreadPoolTask({ _ in
-                var portion: [Int] = []
+                var portion: [Int64] = []
                 for number in chunkStart..<chunkEnd {
                     if isPrime(number: number) {
-                        portion.append(number)
+                        portion.append(Int64(number))
                     }
                 }
                 self.addData(portion)
@@ -61,12 +61,12 @@ final class CalculatingPrimesService: CalculatingPrimesServicing {
     private let dataLocker = NSLock()
 
     private var remainingTasks: Int = 0
-    private var primes: [Int] = []
+    private var primes: [Int64] = []
 
     private var start: UInt64?
     private var end: UInt64?
 
-    private func addData(_ portion: [Int]) {
+    private func addData(_ portion: [Int64]) {
         dataLocker.lock()
         primes.append(contentsOf: portion)
 
