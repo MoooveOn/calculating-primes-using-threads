@@ -9,7 +9,7 @@
 import Foundation
 
 protocol CalculatingPrimesDelagate {
-    func taskCompleted(result: MainPreviewModel)
+    func taskCompleted(result: MainPreviewModel, primes: [Int64])
 }
 
 protocol CalculatingPrimesServicing {
@@ -42,6 +42,8 @@ final class CalculatingPrimesService: CalculatingPrimesServicing {
 
         let chunkSize: Int = 100;
         chunks = (limit - 2) / chunkSize;
+        self.upperBound = Int64(limit)
+        self.threadsCount = Int16(threadCount)
 
         for i in 0..<chunks {
             let chunkStart = 2 + i * chunkSize;
@@ -66,6 +68,9 @@ final class CalculatingPrimesService: CalculatingPrimesServicing {
     private var start: UInt64?
     private var end: UInt64?
 
+    private var upperBound: Int64 = 2
+    private var threadsCount: Int16 = 1
+
     private func addData(_ portion: [Int64]) {
         dataLocker.lock()
         primes.append(contentsOf: portion)
@@ -83,11 +88,11 @@ final class CalculatingPrimesService: CalculatingPrimesServicing {
             }
 
             let result = MainPreviewModel(startTime: Date(),
-                                          upperBound: 10,
-                                          threadsCount: 10,
+                                          upperBound: upperBound,
+                                          threadsCount: threadsCount,
                                           elapsedTime: elapsedTime)
             delegates.forEach {
-                $0.taskCompleted(result: result)
+                $0.taskCompleted(result: result, primes: primes)
             }
 
             primes.removeAll()

@@ -75,13 +75,13 @@ extension MainInteractor: MainPresentableListener {
 // MARK: - CalculatingPrimesDelagate
 
 extension MainInteractor: CalculatingPrimesDelagate {
-    func taskCompleted(result: MainPreviewModel) {
-        // when finished - save & update table
-        cacheRecords.append(result)
+    func taskCompleted(result: MainPreviewModel, primes: [Int64]) {
+        coreDataService.save(record: result, primes: primes)
+        cacheRecords.insert(result, at: 0)
 
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
-            self.presenter.insertRow(at: IndexPath(row: self.cacheRecords.count - 1, section: 0))
+            self.presenter.insertRow(at: IndexPath(row: 0, section: 0))
             self.presenter.inProgress = false
         }
     }

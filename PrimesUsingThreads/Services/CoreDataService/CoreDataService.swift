@@ -10,7 +10,7 @@ import CoreData
 
 protocol CoreDataServicing {
     func fetchRecords() -> [MainPreviewModel]
-    func save(record: MainPreviewModel, newPrimes: [Int64])
+    func save(record: MainPreviewModel, primes: [Int64])
     func cleanCache()
 }
 
@@ -19,7 +19,7 @@ final class CoreDataService: CoreDataServicing {
 
     func fetchRecords() -> [MainPreviewModel] {
         let fetchRequest = PrimesCalculating.createFetchRequest()
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "upperBound", ascending: true)]
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "startTime", ascending: false)]
         var result: [PrimesCalculating] = []
         do {
             let context = coreDataStack.viewContext
@@ -36,13 +36,25 @@ final class CoreDataService: CoreDataServicing {
         }
     }
 
-     func save(record: MainPreviewModel, newPrimes: [Int64]) {
-        guard coreDataStack.viewContext.hasChanges else { return }
+     func save(record: MainPreviewModel, primes: [Int64]) {
+        let savingTask = { [weak self] in
+            guard let self = self else { return }
 
-        do {
-            try coreDataStack.viewContext.save()
-        } catch let error as NSError {
-            print("Unresolved error during saving managed object context: \(error), \(error.userInfo)")
+            let newItem = PrimesCalculating(context: self.coreDataStack.viewContext)
+            newItem.startTime = record.startTime
+            newItem.upperBound = record.upperBound
+            newItem.threadsCount = record.threadsCount
+            newItem.elapsedTime = record.elapsedTime
+
+            do {
+                try self.coreDataStack.viewContext.save()
+            } catch let error as NSError {
+                print("Unresolved error during saving managed object context: \(error), \(error.userInfo)")
+            }
+        }
+
+        DispatchQueue.main.async {
+            savingTask()
         }
     }
 
