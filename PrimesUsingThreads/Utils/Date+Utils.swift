@@ -15,4 +15,11 @@ extension Date {
 
         return dateFormatter.string(from: self)
     }
+
+    func minutesAndSeconds(from date: Date) -> String {
+        let elapsedTime: TimeInterval = Double(self.timeIntervalSince1970 - date.timeIntervalSince1970)
+        let seconds: Int = Int(elapsedTime.remainder(dividingBy: TimeInterval.minute))
+        let minutes: Int = Int(elapsedTime / TimeInterval.minute)
+        return String(format: "%d min: %d sec", minutes, seconds)
+    }
 }

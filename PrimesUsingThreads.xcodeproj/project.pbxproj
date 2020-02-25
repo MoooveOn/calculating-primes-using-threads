@@ -12,6 +12,7 @@
 		7256151524055772002B2CDC /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7256151424055772002B2CDC /* CoreDataService.swift */; };
 		7256151724056781002B2CDC /* PrimesCalculating+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7256151624056780002B2CDC /* PrimesCalculating+CoreDataClass.swift */; };
 		7256151924056784002B2CDC /* PrimesCalculating+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7256151824056784002B2CDC /* PrimesCalculating+CoreDataProperties.swift */; };
+		7256151C24057DC1002B2CDC /* TimeInterval+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7256151B24057DC1002B2CDC /* TimeInterval+Utils.swift */; };
 		72AE73BB2401D058003423FA /* Atomic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72AE73BA2401D058003423FA /* Atomic.swift */; };
 		72AE73C024028A78003423FA /* MainPreviewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72AE73BF24028A78003423FA /* MainPreviewCell.xib */; };
 		72AE73C224028A84003423FA /* MainPreviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72AE73C124028A84003423FA /* MainPreviewCell.swift */; };
@@ -48,6 +49,7 @@
 		7256151424055772002B2CDC /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
 		7256151624056780002B2CDC /* PrimesCalculating+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "PrimesCalculating+CoreDataClass.swift"; path = "/Users/pavelselivanov/Desktop/Projects-AI/Prime numbers with ThreadPool and cashing/PrimesUsingThreads/PrimesUsingThreads/Resources/PrimesCalculating+CoreDataClass.swift"; sourceTree = "<absolute>"; };
 		7256151824056784002B2CDC /* PrimesCalculating+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "PrimesCalculating+CoreDataProperties.swift"; path = "/Users/pavelselivanov/Desktop/Projects-AI/Prime numbers with ThreadPool and cashing/PrimesUsingThreads/PrimesUsingThreads/Resources/PrimesCalculating+CoreDataProperties.swift"; sourceTree = "<absolute>"; };
+		7256151B24057DC1002B2CDC /* TimeInterval+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimeInterval+Utils.swift"; sourceTree = "<group>"; };
 		72AE73BA2401D058003423FA /* Atomic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Atomic.swift; sourceTree = "<group>"; };
 		72AE73BF24028A78003423FA /* MainPreviewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainPreviewCell.xib; sourceTree = "<group>"; };
 		72AE73C124028A84003423FA /* MainPreviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPreviewCell.swift; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 				72AE73BA2401D058003423FA /* Atomic.swift */,
 				72AE73DE2402B514003423FA /* ThreadPool.swift */,
 				72AE73DC2402B20D003423FA /* Date+Utils.swift */,
+				7256151B24057DC1002B2CDC /* TimeInterval+Utils.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -429,6 +432,7 @@
 				72F8E55624016BC1005E3A3F /* ServiceBuilder.swift in Sources */,
 				72F8E55D24016D33005E3A3F /* MainRouter.swift in Sources */,
 				72F8E55E24016D33005E3A3F /* MainViewController.swift in Sources */,
+				7256151C24057DC1002B2CDC /* TimeInterval+Utils.swift in Sources */,
 				724400F024047D12008885D0 /* Primes.xcdatamodeld in Sources */,
 				72AE73DF2402B514003423FA /* ThreadPool.swift in Sources */,
 				72AE73BB2401D058003423FA /* Atomic.swift in Sources */,

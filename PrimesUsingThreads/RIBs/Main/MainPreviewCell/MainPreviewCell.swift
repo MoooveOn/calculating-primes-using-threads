@@ -22,7 +22,17 @@ class MainPreviewCell: UITableViewCell, ConfigurableCell, NibRegistrableCell {
         startTimeLabel.text = #"Start time: \#(item.startTime.beautyStyle)"#
         upperBoundLabel.text = #"Upper bound: \#(item.upperBound)"#
         threadsCountLabel.text = #"Threads count: \#(item.threadsCount)"#
-        let roundedElapsedTime = round(item.elapsedTime * 1000) / 1000
-        elapsedTimeLabel.text = #"Elapsed time: \#(roundedElapsedTime) sec"#
+        let elapsedTime = getFormatted(elapsedTime: round(item.elapsedTime * 1000) / 1000)
+        elapsedTimeLabel.text = #"Elapsed time: \#(elapsedTime)"#
+    }
+
+    private func getFormatted(elapsedTime: Double) -> String {
+        let minutes: Int = Int(elapsedTime / TimeInterval.minute)
+        let seconds: Double = elapsedTime - TimeInterval.minute * Double(minutes)
+        if minutes == 0 {
+            return String(format: "%.3f sec", seconds)
+        } else {
+            return String(format: "%d min: %.3f sec", minutes, seconds)
+        }
     }
 }
