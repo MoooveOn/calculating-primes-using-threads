@@ -10,9 +10,11 @@
 		724400F024047D12008885D0 /* Primes.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 724400EE24047D12008885D0 /* Primes.xcdatamodeld */; };
 		724400F224047F68008885D0 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724400F124047F68008885D0 /* CoreDataStack.swift */; };
 		7256151524055772002B2CDC /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7256151424055772002B2CDC /* CoreDataService.swift */; };
-		7256151724056781002B2CDC /* PrimesCalculating+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7256151624056780002B2CDC /* PrimesCalculating+CoreDataClass.swift */; };
-		7256151924056784002B2CDC /* PrimesCalculating+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7256151824056784002B2CDC /* PrimesCalculating+CoreDataProperties.swift */; };
 		7256151C24057DC1002B2CDC /* TimeInterval+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7256151B24057DC1002B2CDC /* TimeInterval+Utils.swift */; };
+		7278EA40240674850066F4D9 /* PrimesCalculating+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7278EA3E240674850066F4D9 /* PrimesCalculating+CoreDataClass.swift */; };
+		7278EA41240674850066F4D9 /* PrimesCalculating+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7278EA3F240674850066F4D9 /* PrimesCalculating+CoreDataProperties.swift */; };
+		7278EA52240676780066F4D9 /* Prime+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7278EA50240676780066F4D9 /* Prime+CoreDataClass.swift */; };
+		7278EA53240676780066F4D9 /* Prime+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7278EA51240676780066F4D9 /* Prime+CoreDataProperties.swift */; };
 		72AE73BB2401D058003423FA /* Atomic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72AE73BA2401D058003423FA /* Atomic.swift */; };
 		72AE73C024028A78003423FA /* MainPreviewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72AE73BF24028A78003423FA /* MainPreviewCell.xib */; };
 		72AE73C224028A84003423FA /* MainPreviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72AE73C124028A84003423FA /* MainPreviewCell.swift */; };
@@ -47,9 +49,11 @@
 		724400EF24047D12008885D0 /* Primes.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Primes.xcdatamodel; sourceTree = "<group>"; };
 		724400F124047F68008885D0 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		7256151424055772002B2CDC /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
-		7256151624056780002B2CDC /* PrimesCalculating+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "PrimesCalculating+CoreDataClass.swift"; path = "/Users/pavelselivanov/Desktop/Projects-AI/Prime numbers with ThreadPool and cashing/PrimesUsingThreads/PrimesUsingThreads/Resources/PrimesCalculating+CoreDataClass.swift"; sourceTree = "<absolute>"; };
-		7256151824056784002B2CDC /* PrimesCalculating+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "PrimesCalculating+CoreDataProperties.swift"; path = "/Users/pavelselivanov/Desktop/Projects-AI/Prime numbers with ThreadPool and cashing/PrimesUsingThreads/PrimesUsingThreads/Resources/PrimesCalculating+CoreDataProperties.swift"; sourceTree = "<absolute>"; };
 		7256151B24057DC1002B2CDC /* TimeInterval+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimeInterval+Utils.swift"; sourceTree = "<group>"; };
+		7278EA3E240674850066F4D9 /* PrimesCalculating+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PrimesCalculating+CoreDataClass.swift"; sourceTree = "<group>"; };
+		7278EA3F240674850066F4D9 /* PrimesCalculating+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PrimesCalculating+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		7278EA50240676780066F4D9 /* Prime+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Prime+CoreDataClass.swift"; sourceTree = "<group>"; };
+		7278EA51240676780066F4D9 /* Prime+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Prime+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		72AE73BA2401D058003423FA /* Atomic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Atomic.swift; sourceTree = "<group>"; };
 		72AE73BF24028A78003423FA /* MainPreviewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainPreviewCell.xib; sourceTree = "<group>"; };
 		72AE73C124028A84003423FA /* MainPreviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPreviewCell.swift; sourceTree = "<group>"; };
@@ -117,10 +121,28 @@
 		7256151A2405684A002B2CDC /* CoreDataEntities */ = {
 			isa = PBXGroup;
 			children = (
-				7256151624056780002B2CDC /* PrimesCalculating+CoreDataClass.swift */,
-				7256151824056784002B2CDC /* PrimesCalculating+CoreDataProperties.swift */,
+				7278EA39240672F20066F4D9 /* Prime */,
+				7278EA38240672E90066F4D9 /* PrimesCalculating */,
 			);
 			path = CoreDataEntities;
+			sourceTree = "<group>";
+		};
+		7278EA38240672E90066F4D9 /* PrimesCalculating */ = {
+			isa = PBXGroup;
+			children = (
+				7278EA3E240674850066F4D9 /* PrimesCalculating+CoreDataClass.swift */,
+				7278EA3F240674850066F4D9 /* PrimesCalculating+CoreDataProperties.swift */,
+			);
+			path = PrimesCalculating;
+			sourceTree = "<group>";
+		};
+		7278EA39240672F20066F4D9 /* Prime */ = {
+			isa = PBXGroup;
+			children = (
+				7278EA50240676780066F4D9 /* Prime+CoreDataClass.swift */,
+				7278EA51240676780066F4D9 /* Prime+CoreDataProperties.swift */,
+			);
+			path = Prime;
 			sourceTree = "<group>";
 		};
 		72AE73B92401D044003423FA /* Utils */ = {
@@ -411,10 +433,10 @@
 			files = (
 				72F8E54E2401692C005E3A3F /* RootInteractor.swift in Sources */,
 				72AE73E12403218B003423FA /* CalculatingPrimesService.swift in Sources */,
+				7278EA40240674850066F4D9 /* PrimesCalculating+CoreDataClass.swift in Sources */,
 				72F8E5452401688D005E3A3F /* AppComponent.swift in Sources */,
 				72F8E54B2401692C005E3A3F /* RootRouter.swift in Sources */,
 				72F8E55F24016D33005E3A3F /* MainBuilder.swift in Sources */,
-				7256151924056784002B2CDC /* PrimesCalculating+CoreDataProperties.swift in Sources */,
 				72F8E56424016E6C005E3A3F /* RootComponent+Main.swift in Sources */,
 				72AE73DD2402B20D003423FA /* Date+Utils.swift in Sources */,
 				72AE73C224028A84003423FA /* MainPreviewCell.swift in Sources */,
@@ -425,18 +447,20 @@
 				72AFAAED240163F50020507E /* AppDelegate.swift in Sources */,
 				72AE73DA2402A68C003423FA /* NibRegistrableCell.swift in Sources */,
 				72AE73C524028ABF003423FA /* MainPreviewModel.swift in Sources */,
-				7256151724056781002B2CDC /* PrimesCalculating+CoreDataClass.swift in Sources */,
 				724400F224047F68008885D0 /* CoreDataStack.swift in Sources */,
 				72F8E55224016AB0005E3A3F /* ViewableRouter+Extension.swift in Sources */,
 				7256151524055772002B2CDC /* CoreDataService.swift in Sources */,
 				72F8E55624016BC1005E3A3F /* ServiceBuilder.swift in Sources */,
 				72F8E55D24016D33005E3A3F /* MainRouter.swift in Sources */,
 				72F8E55E24016D33005E3A3F /* MainViewController.swift in Sources */,
+				7278EA52240676780066F4D9 /* Prime+CoreDataClass.swift in Sources */,
 				7256151C24057DC1002B2CDC /* TimeInterval+Utils.swift in Sources */,
 				724400F024047D12008885D0 /* Primes.xcdatamodeld in Sources */,
 				72AE73DF2402B514003423FA /* ThreadPool.swift in Sources */,
 				72AE73BB2401D058003423FA /* Atomic.swift in Sources */,
 				72F8E56024016D33005E3A3F /* MainInteractor.swift in Sources */,
+				7278EA41240674850066F4D9 /* PrimesCalculating+CoreDataProperties.swift in Sources */,
+				7278EA53240676780066F4D9 /* Prime+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

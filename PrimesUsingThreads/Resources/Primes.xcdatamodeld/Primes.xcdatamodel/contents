@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15702" systemVersion="19B88" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Prime" representedClassName=".Prime" syncable="YES">
+        <attribute name="value" attributeType="Integer 64" minValueString="2" defaultValueString="0" usesScalarValueType="YES"/>
+        <fetchIndex name="byPropertyIndex">
+            <fetchIndexElement property="value" type="Binary" order="ascending"/>
+        </fetchIndex>
+    </entity>
     <entity name="PrimesCalculating" representedClassName=".PrimesCalculating" syncable="YES">
         <attribute name="elapsedTime" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="startTime" attributeType="Date" usesScalarValueType="NO"/>
@@ -8,5 +14,6 @@
     </entity>
     <elements>
         <element name="PrimesCalculating" positionX="-63" positionY="-18" width="128" height="103"/>
+        <element name="Prime" positionX="-63" positionY="9" width="128" height="58"/>
     </elements>
 </model>

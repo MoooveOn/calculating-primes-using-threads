@@ -36,7 +36,11 @@ final class CoreDataService: CoreDataServicing {
         }
     }
 
-     func save(record: MainPreviewModel, primes: [Int64]) {
+    func fetchPrimes() {
+        
+    }
+
+    func save(record: MainPreviewModel, primes: [Int64]) {
         let savingTask = { [weak self] in
             guard let self = self else { return }
 

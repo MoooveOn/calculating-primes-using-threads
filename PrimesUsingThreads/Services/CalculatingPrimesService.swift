@@ -82,11 +82,8 @@ final class CalculatingPrimesService: CalculatingPrimesServicing {
             print(primes.count)
 
             end = DispatchTime.now().uptimeNanoseconds
+            
             let elapsedTime = Double((end! - start!)) / 1_000_000_000.0
-            DispatchQueue.main.async {
-                print("Threads: \(elapsedTime) sec")
-            }
-
             let result = MainPreviewModel(startTime: Date(),
                                           upperBound: upperBound,
                                           threadsCount: threadsCount,
