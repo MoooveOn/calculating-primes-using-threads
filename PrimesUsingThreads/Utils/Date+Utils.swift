@@ -11,7 +11,7 @@ import Foundation
 extension Date {
     var beautyStyle: String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "HH:mm:ss MM-dd-yyyy"
+        dateFormatter.dateFormat = "HH:mm:ss dd-MM-yyyy"
 
         return dateFormatter.string(from: self)
     }

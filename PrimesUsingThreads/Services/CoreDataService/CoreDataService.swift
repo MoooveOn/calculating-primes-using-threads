@@ -10,12 +10,14 @@ import CoreData
 
 protocol CoreDataServicing {
     func fetchRecords() -> [MainPreviewModel]
+    func fetchPrimes() -> [Int64]
     func save(record: MainPreviewModel, primes: [Int64])
     func cleanCache()
 }
 
 final class CoreDataService: CoreDataServicing {
     private let coreDataStack: CoreDataStack = CoreDataStack.shared
+    private var maxPrime: Int64 = 0
 
     func fetchRecords() -> [MainPreviewModel] {
         let fetchRequest = PrimesCalculating.createFetchRequest()
@@ -24,7 +26,7 @@ final class CoreDataService: CoreDataServicing {
         do {
             let context = coreDataStack.viewContext
             result = try context.fetch(fetchRequest)
-        } catch {
+        } catch let error {
             print("Error occurred: \(error.localizedDescription)")
         }
 
@@ -36,29 +38,51 @@ final class CoreDataService: CoreDataServicing {
         }
     }
 
-    func fetchPrimes() {
-        
+    func fetchPrimes() -> [Int64] {
+        let fetchRequest = Prime.createfetchRequest()
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "value", ascending: true)]
+        var result: [Prime] = []
+        do {
+            let context = coreDataStack.viewContext
+            result = try context.fetch(fetchRequest)
+        } catch let error {
+            print("Error occurred: \(error.localizedDescription)")
+        }
+        maxPrime = result.last?.value ?? 0
+
+        return result.compactMap { return $0.value }
     }
 
     func save(record: MainPreviewModel, primes: [Int64]) {
-        let savingTask = { [weak self] in
-            guard let self = self else { return }
-
-            let newItem = PrimesCalculating(context: self.coreDataStack.viewContext)
-            newItem.startTime = record.startTime
-            newItem.upperBound = record.upperBound
-            newItem.threadsCount = record.threadsCount
-            newItem.elapsedTime = record.elapsedTime
+        coreDataStack.persistentContainer.performBackgroundTask { context in
+            let newRecord = PrimesCalculating(context: context)
+            newRecord.startTime = record.startTime
+            newRecord.upperBound = record.upperBound
+            newRecord.threadsCount = record.threadsCount
+            newRecord.elapsedTime = record.elapsedTime
 
             do {
-                try self.coreDataStack.viewContext.save()
+                try context.save()
             } catch let error as NSError {
                 print("Unresolved error during saving managed object context: \(error), \(error.userInfo)")
             }
         }
 
-        DispatchQueue.main.async {
-            savingTask()
+        coreDataStack.persistentContainer.performBackgroundTask { [weak self] context in
+            guard let self = self else { return }
+
+            for prime in primes {
+                if prime > self.maxPrime {
+                    let newPrime = Prime(context: context)
+                    newPrime.value = prime
+                }
+            }
+
+            do {
+                try context.save()
+            } catch let error as NSError {
+                print("Unresolved error during saving managed object context: \(error), \(error.userInfo)")
+            }
         }
     }
 

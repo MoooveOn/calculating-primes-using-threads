@@ -38,26 +38,39 @@ final class CalculatingPrimesService: CalculatingPrimesServicing {
         guard !isBusy else { return }
         isBusy = true
 
-        threadPool = ThreadPool(threadCount: threadCount, threadPriority: 10.0)
-
-        let chunkSize: Int = 100;
-        chunks = (limit - 2) / chunkSize;
-        self.upperBound = Int64(limit)
-        self.threadsCount = Int16(threadCount)
-
-        for i in 0..<chunks {
-            let chunkStart = 2 + i * chunkSize;
-            let chunkEnd = i == (chunks - 1) ? limit : chunkStart + chunkSize;
-            threadPool.addTask(ThreadPoolTask({ _ in
-                var portion: [Int64] = []
-                for number in chunkStart..<chunkEnd {
-                    if isPrime(number: number) {
-                        portion.append(Int64(number))
-                    }
-                }
-                self.addData(portion)
-            }))
+        let newTask = prepareNewTask(to: limit, threadCount: threadCount)
+        DispatchQueue.global(qos: .userInitiated).async {
+            newTask()
         }
+    }
+
+    private func prepareNewTask(to limit: Int, threadCount: Int) -> () -> () {
+        let task = { [weak self] in
+            guard let self = self else { return }
+
+            self.threadPool = ThreadPool(threadCount: threadCount, threadPriority: 10.0)
+
+            let chunkSize: Int = 100;
+            self.chunks = (limit - 2) / chunkSize;
+            self.upperBound = Int64(limit)
+            self.threadsCount = Int16(threadCount)
+
+            for i in 0..<self.chunks {
+                let chunkStart = 2 + i * chunkSize;
+                let chunkEnd = i == (self.chunks - 1) ? limit : chunkStart + chunkSize;
+                self.threadPool.addTask(ThreadPoolTask({ _ in
+                    var portion: [Int64] = []
+                    for number in chunkStart..<chunkEnd {
+                        if isPrime(number: number) {
+                            portion.append(Int64(number))
+                        }
+                    }
+                    self.addData(portion)
+                }))
+            }
+        }
+
+        return task
     }
 
     private let dataLocker = NSLock()
@@ -82,7 +95,7 @@ final class CalculatingPrimesService: CalculatingPrimesServicing {
             print(primes.count)
 
             end = DispatchTime.now().uptimeNanoseconds
-            
+
             let elapsedTime = Double((end! - start!)) / 1_000_000_000.0
             let result = MainPreviewModel(startTime: Date(),
                                           upperBound: upperBound,
