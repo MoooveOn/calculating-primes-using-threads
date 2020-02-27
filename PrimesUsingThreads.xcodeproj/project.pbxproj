@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7241C5702407326000BF8FF8 /* DetailsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7241C56B2407326000BF8FF8 /* DetailsRouter.swift */; };
+		7241C5712407326000BF8FF8 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7241C56C2407326000BF8FF8 /* DetailsViewController.swift */; };
+		7241C5722407326000BF8FF8 /* DetailsBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7241C56D2407326000BF8FF8 /* DetailsBuilder.swift */; };
+		7241C5732407326000BF8FF8 /* DetailsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7241C56E2407326000BF8FF8 /* DetailsInteractor.swift */; };
+		7241C5742407326000BF8FF8 /* DetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7241C56F2407326000BF8FF8 /* DetailsViewController.xib */; };
 		724400F024047D12008885D0 /* Primes.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 724400EE24047D12008885D0 /* Primes.xcdatamodeld */; };
 		724400F224047F68008885D0 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724400F124047F68008885D0 /* CoreDataStack.swift */; };
 		7256151524055772002B2CDC /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7256151424055772002B2CDC /* CoreDataService.swift */; };
@@ -46,6 +51,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7241C56B2407326000BF8FF8 /* DetailsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsRouter.swift; sourceTree = "<group>"; };
+		7241C56C2407326000BF8FF8 /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
+		7241C56D2407326000BF8FF8 /* DetailsBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsBuilder.swift; sourceTree = "<group>"; };
+		7241C56E2407326000BF8FF8 /* DetailsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsInteractor.swift; sourceTree = "<group>"; };
+		7241C56F2407326000BF8FF8 /* DetailsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailsViewController.xib; sourceTree = "<group>"; };
 		724400EF24047D12008885D0 /* Primes.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Primes.xcdatamodel; sourceTree = "<group>"; };
 		724400F124047F68008885D0 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		7256151424055772002B2CDC /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
@@ -106,6 +116,18 @@
 				C87A48F66B5BE4F87BFD3E16 /* Pods_PrimesUsingThreads.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7241C56A2407324200BF8FF8 /* Details */ = {
+			isa = PBXGroup;
+			children = (
+				7241C56D2407326000BF8FF8 /* DetailsBuilder.swift */,
+				7241C56E2407326000BF8FF8 /* DetailsInteractor.swift */,
+				7241C56B2407326000BF8FF8 /* DetailsRouter.swift */,
+				7241C56C2407326000BF8FF8 /* DetailsViewController.swift */,
+				7241C56F2407326000BF8FF8 /* DetailsViewController.xib */,
+			);
+			path = Details;
 			sourceTree = "<group>";
 		};
 		724400ED24047C7E008885D0 /* CoreDataService */ = {
@@ -230,6 +252,7 @@
 				72F8E55024016AA2005E3A3F /* Common */,
 				72F8E53D2401681C005E3A3F /* Root */,
 				72F8E55724016D04005E3A3F /* Main */,
+				7241C56A2407324200BF8FF8 /* Details */,
 			);
 			path = RIBs;
 			sourceTree = "<group>";
@@ -379,6 +402,7 @@
 				72AE73C024028A78003423FA /* MainPreviewCell.xib in Resources */,
 				72F8E54F2401692C005E3A3F /* RootViewController.xib in Resources */,
 				72F8E56124016D33005E3A3F /* MainViewController.xib in Resources */,
+				7241C5742407326000BF8FF8 /* DetailsViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -445,21 +469,25 @@
 				72AE73CA24028CB0003423FA /* ReusableCell.swift in Sources */,
 				72F8E54C2401692C005E3A3F /* RootViewController.swift in Sources */,
 				72AFAAED240163F50020507E /* AppDelegate.swift in Sources */,
+				7241C5702407326000BF8FF8 /* DetailsRouter.swift in Sources */,
 				72AE73DA2402A68C003423FA /* NibRegistrableCell.swift in Sources */,
 				72AE73C524028ABF003423FA /* MainPreviewModel.swift in Sources */,
 				724400F224047F68008885D0 /* CoreDataStack.swift in Sources */,
 				72F8E55224016AB0005E3A3F /* ViewableRouter+Extension.swift in Sources */,
 				7256151524055772002B2CDC /* CoreDataService.swift in Sources */,
 				72F8E55624016BC1005E3A3F /* ServiceBuilder.swift in Sources */,
+				7241C5732407326000BF8FF8 /* DetailsInteractor.swift in Sources */,
 				72F8E55D24016D33005E3A3F /* MainRouter.swift in Sources */,
 				72F8E55E24016D33005E3A3F /* MainViewController.swift in Sources */,
 				7278EA52240676780066F4D9 /* Prime+CoreDataClass.swift in Sources */,
 				7256151C24057DC1002B2CDC /* TimeInterval+Utils.swift in Sources */,
 				724400F024047D12008885D0 /* Primes.xcdatamodeld in Sources */,
 				72AE73DF2402B514003423FA /* ThreadPool.swift in Sources */,
+				7241C5712407326000BF8FF8 /* DetailsViewController.swift in Sources */,
 				72AE73BB2401D058003423FA /* Atomic.swift in Sources */,
 				72F8E56024016D33005E3A3F /* MainInteractor.swift in Sources */,
 				7278EA41240674850066F4D9 /* PrimesCalculating+CoreDataProperties.swift in Sources */,
+				7241C5722407326000BF8FF8 /* DetailsBuilder.swift in Sources */,
 				7278EA53240676780066F4D9 /* Prime+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

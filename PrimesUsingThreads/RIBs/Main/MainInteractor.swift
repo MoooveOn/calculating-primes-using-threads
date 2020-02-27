@@ -50,11 +50,17 @@ final class MainInteractor: PresentableInteractor<MainPresentable>, MainInteract
     override func didBecomeActive() {
         super.didBecomeActive()
 
-        cacheRecords = coreDataService.fetchRecords()
+        loadCoreData()
     }
 
     override func willResignActive() {
         super.willResignActive()
+    }
+
+    private func loadCoreData() {
+        coreDataService.fetchRecords { [weak self] records in
+            self?.cacheRecords = records
+        }
     }
 }
 
@@ -62,7 +68,7 @@ final class MainInteractor: PresentableInteractor<MainPresentable>, MainInteract
 
 extension MainInteractor: MainPresentableListener {
     func onStartButtonAction(upperBound: Int, threadsCount: Int) {
-        calculatingPrimesService.calculatePrimesUsingThreadPoolUp(to: upperBound, threadCount: threadsCount)
+        calculatingPrimesService.calculatePrimesUsingThreadPoolUp(to: upperBound, threadCount: threadsCount, cachedPrimes: coreDataService.cachedPrimes)
     }
 
     func onCleanCacheButtonAction() {

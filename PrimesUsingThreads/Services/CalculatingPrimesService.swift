@@ -14,7 +14,7 @@ protocol CalculatingPrimesDelagate {
 
 protocol CalculatingPrimesServicing {
     func addListener(_ delegate: CalculatingPrimesDelagate)
-    func calculatePrimesUsingThreadPoolUp(to limit: Int, threadCount: Int)
+    func calculatePrimesUsingThreadPoolUp(to limit: Int, threadCount: Int, cachedPrimes: [Int64])
 }
 
 final class CalculatingPrimesService: CalculatingPrimesServicing {
@@ -34,7 +34,7 @@ final class CalculatingPrimesService: CalculatingPrimesServicing {
         }
     }
 
-    func calculatePrimesUsingThreadPoolUp(to limit: Int, threadCount: Int) {
+    func calculatePrimesUsingThreadPoolUp(to limit: Int, threadCount: Int, cachedPrimes: [Int64]) {
         guard !isBusy else { return }
         isBusy = true
 
@@ -44,19 +44,19 @@ final class CalculatingPrimesService: CalculatingPrimesServicing {
         }
     }
 
-    private func prepareNewTask(to limit: Int, threadCount: Int) -> () -> () {
+    private func prepareNewTask(start: Int = 2, to limit: Int, threadCount: Int) -> () -> () {
         let task = { [weak self] in
             guard let self = self else { return }
 
             self.threadPool = ThreadPool(threadCount: threadCount, threadPriority: 10.0)
 
             let chunkSize: Int = 100;
-            self.chunks = (limit - 2) / chunkSize;
+            self.chunks = (limit - start) / chunkSize;
             self.upperBound = Int64(limit)
             self.threadsCount = Int16(threadCount)
 
             for i in 0..<self.chunks {
-                let chunkStart = 2 + i * chunkSize;
+                let chunkStart = start + i * chunkSize;
                 let chunkEnd = i == (self.chunks - 1) ? limit : chunkStart + chunkSize;
                 self.threadPool.addTask(ThreadPoolTask({ _ in
                     var portion: [Int64] = []

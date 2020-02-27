@@ -9,48 +9,68 @@
 import CoreData
 
 protocol CoreDataServicing {
-    func fetchRecords() -> [MainPreviewModel]
-    func fetchPrimes() -> [Int64]
+    var cachedPrimes: [Int64] { get }
+    
+    func addListener(_ delegate: CoreDataDelegate)
+    func fetchRecords(completion: @escaping (_ records: [MainPreviewModel]) -> ())
     func save(record: MainPreviewModel, primes: [Int64])
     func cleanCache()
 }
 
+protocol CoreDataDelegate {
+
+}
+
 final class CoreDataService: CoreDataServicing {
+    private var delegates: [CoreDataDelegate] = []
     private let coreDataStack: CoreDataStack = CoreDataStack.shared
-    private var maxPrime: Int64 = 0
+    internal var cachedPrimes: [Int64] = []
 
-    func fetchRecords() -> [MainPreviewModel] {
-        let fetchRequest = PrimesCalculating.createFetchRequest()
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "startTime", ascending: false)]
-        var result: [PrimesCalculating] = []
-        do {
-            let context = coreDataStack.viewContext
-            result = try context.fetch(fetchRequest)
-        } catch let error {
-            print("Error occurred: \(error.localizedDescription)")
-        }
+    init() {
+        fetchPrimes()
+    }
 
-        return result.compactMap { (item: PrimesCalculating) -> MainPreviewModel? in
-            return MainPreviewModel(startTime: item.startTime ?? Date(),
-                                    upperBound: item.upperBound,
-                                    threadsCount: item.threadsCount,
-                                    elapsedTime: item.elapsedTime)
+    func addListener(_ delegate: CoreDataDelegate) {
+        delegates.append(delegate)
+    }
+
+    func fetchRecords(completion: @escaping (_ records: [MainPreviewModel]) -> ()) {
+        coreDataStack.persistentContainer.performBackgroundTask { context in
+            let fetchRequest = PrimesCalculating.createFetchRequest()
+            fetchRequest.sortDescriptors = [NSSortDescriptor(key: "startTime", ascending: false)]
+            var result: [PrimesCalculating] = []
+            do {
+                result = try context.fetch(fetchRequest)
+            } catch let error {
+                print("Error occurred: \(error.localizedDescription)")
+            }
+
+            let records: [MainPreviewModel] = result.compactMap { (item: PrimesCalculating) -> MainPreviewModel? in
+                MainPreviewModel(startTime: item.startTime ?? Date(),
+                                 upperBound: item.upperBound,
+                                 threadsCount: item.threadsCount,
+                                 elapsedTime: item.elapsedTime)
+            }
+
+            completion(records)
         }
     }
 
-    func fetchPrimes() -> [Int64] {
-        let fetchRequest = Prime.createfetchRequest()
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "value", ascending: true)]
-        var result: [Prime] = []
-        do {
-            let context = coreDataStack.viewContext
-            result = try context.fetch(fetchRequest)
-        } catch let error {
-            print("Error occurred: \(error.localizedDescription)")
-        }
-        maxPrime = result.last?.value ?? 0
+    private func fetchPrimes() {
+        coreDataStack.persistentContainer.performBackgroundTask { [weak self] context in
+            guard let self = self else { return }
 
-        return result.compactMap { return $0.value }
+            let fetchRequest = Prime.createfetchRequest()
+            fetchRequest.sortDescriptors = [NSSortDescriptor(key: "value", ascending: true)]
+            var result: [Prime] = []
+            do {
+                result = try context.fetch(fetchRequest)
+            } catch let error {
+                print("Error occurred: \(error.localizedDescription)")
+            }
+
+            self.cachedPrimes = result.compactMap { return $0.value }
+        }
     }
 
     func save(record: MainPreviewModel, primes: [Int64]) {
@@ -71,10 +91,12 @@ final class CoreDataService: CoreDataServicing {
         coreDataStack.persistentContainer.performBackgroundTask { [weak self] context in
             guard let self = self else { return }
 
+            let maxPrime: Int64 = self.cachedPrimes.last ?? 2
             for prime in primes {
-                if prime > self.maxPrime {
-                    let newPrime = Prime(context: context)
-                    newPrime.value = prime
+                if prime > maxPrime {
+                    let newItem = Prime(context: context)
+                    newItem.value = prime
+                    self.cachedPrimes.append(prime)
                 }
             }
 
