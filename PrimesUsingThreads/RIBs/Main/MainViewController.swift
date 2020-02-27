@@ -12,8 +12,10 @@ import UIKit
 import TransitionButton
 
 protocol MainPresentableListener: class {
-    var cacheRecords: [MainPreviewModel] { get }
+    var cacheRecordsCount: Int { get }
 
+    func cacheRecord(at index: Int) -> MainPreviewModel
+    func onDetailsAction(index: Int)
     func onStartButtonAction(upperBound: Int, threadsCount: Int)
     func onCleanCacheButtonAction()
 }
@@ -134,7 +136,7 @@ extension MainViewController {
 
 extension MainViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // go to new view
+        listener?.onDetailsAction(index: indexPath.row)
     }
 }
 
@@ -146,13 +148,13 @@ extension MainViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return listener?.cacheRecords.count ?? 0
+        return listener?.cacheRecordsCount ?? 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard
           let cell = tableView.dequeueReusableCell(withIdentifier: MainPreviewCell.reuseIdentifier, for: indexPath) as? MainPreviewCell,
-          let record = listener?.cacheRecords[indexPath.row]
+          let record = listener?.cacheRecord(at: indexPath.row)
           else {
             return UITableViewCell()
         }

@@ -8,7 +8,7 @@
 
 import RIBs
 
-protocol MainDependency: Dependency {
+protocol MainDependency: MainDependencyDetails {
     var serviceBuilder: ServiceBuildable { get }
 }
 
@@ -36,6 +36,11 @@ final class MainBuilder: Builder<MainDependency>, MainBuildable {
                                         calculatingPrimesService: dependency.serviceBuilder.calculatingPrimesService,
                                         coreDataService: dependency.serviceBuilder.coreDataService)
         interactor.listener = listener
-        return MainRouter(interactor: interactor, viewController: viewController)
+
+        let detailsBuilder = DetailsBuilder(dependency: component)
+
+        return MainRouter(interactor: interactor,
+                          viewController: viewController,
+                          detailsBuilder: detailsBuilder)
     }
 }

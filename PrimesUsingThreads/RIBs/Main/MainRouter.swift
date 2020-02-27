@@ -8,7 +8,7 @@
 
 import RIBs
 
-protocol MainInteractable: Interactable {
+protocol MainInteractable: Interactable, DetailsListener {
     var router: MainRouting? { get set }
     var listener: MainListener? { get set }
 }
@@ -18,8 +18,28 @@ protocol MainViewControllable: ViewControllable {
 }
 
 final class MainRouter: ViewableRouter<MainInteractable, MainViewControllable>, MainRouting {
-    override init(interactor: MainInteractable, viewController: MainViewControllable) {
+    init(interactor: MainInteractable,
+         viewController: MainViewControllable,
+         detailsBuilder: DetailsBuildable) {
+
+        self.detailsBuilder = detailsBuilder
+
         super.init(interactor: interactor, viewController: viewController)
+
         interactor.router = self
+    }
+
+    // MARK: - Private
+
+    private var details: ViewableRouting?
+    private let detailsBuilder: DetailsBuildable
+
+    func routeToDetails(with previewModel: MainPreviewModel, primes: [Int64]) {
+        let rib = detailsBuilder.build(withListener: interactor)
+        details = presentRIB(rib)
+    }
+
+    func routeFromDetails() {
+        dismissRIB(&details)
     }
 }

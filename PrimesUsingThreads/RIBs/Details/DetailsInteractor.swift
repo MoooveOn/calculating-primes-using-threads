@@ -19,16 +19,14 @@ protocol DetailsPresentable: Presentable {
 }
 
 protocol DetailsListener: class {
-    // TODO: Declare methods the interactor can invoke to communicate with other RIBs.
+    func closeDetails()
 }
 
-final class DetailsInteractor: PresentableInteractor<DetailsPresentable>, DetailsInteractable, DetailsPresentableListener {
+final class DetailsInteractor: PresentableInteractor<DetailsPresentable>, DetailsInteractable {
 
     weak var router: DetailsRouting?
     weak var listener: DetailsListener?
 
-    // TODO: Add additional dependencies to constructor. Do not perform any logic
-    // in constructor.
     override init(presenter: DetailsPresentable) {
         super.init(presenter: presenter)
         presenter.listener = self
@@ -42,5 +40,13 @@ final class DetailsInteractor: PresentableInteractor<DetailsPresentable>, Detail
     override func willResignActive() {
         super.willResignActive()
         // TODO: Pause any business logic.
+    }
+}
+
+// MARK: - DetailsPresentableListener
+
+extension DetailsInteractor: DetailsPresentableListener {
+    func onDoneAction() {
+        listener?.closeDetails()
     }
 }
