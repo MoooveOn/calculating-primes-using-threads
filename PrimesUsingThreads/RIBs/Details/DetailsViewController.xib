@@ -11,6 +11,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DetailsViewController">
             <connections>
                 <outlet property="elapsedTimeLabel" destination="jkC-Nc-NmH" id="ybO-n0-szb"/>
+                <outlet property="primesTableView" destination="TVj-q7-7Vl" id="Nb0-D7-XGI"/>
                 <outlet property="startTimeLabel" destination="MRc-6s-vjg" id="E6U-7D-5Pw"/>
                 <outlet property="threadsCountLabel" destination="2Ll-mH-Fd2" id="gOA-eZ-pvU"/>
                 <outlet property="upperBoundLabel" destination="5V1-2B-Aby" id="2s6-9j-j2T"/>

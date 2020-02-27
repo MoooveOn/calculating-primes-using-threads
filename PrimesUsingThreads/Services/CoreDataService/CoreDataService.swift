@@ -13,6 +13,7 @@ protocol CoreDataServicing {
     
     func addListener(_ delegate: CoreDataDelegate)
     func fetchRecords(completion: @escaping (_ records: [MainPreviewModel]) -> ())
+    func getPrimes(upTo upperBound: Int64) -> [Int64]
     func save(record: MainPreviewModel, primes: [Int64])
     func cleanCache()
 }
@@ -71,6 +72,13 @@ final class CoreDataService: CoreDataServicing {
 
             self.cachedPrimes = result.compactMap { return $0.value }
         }
+    }
+
+    func getPrimes(upTo upperBound: Int64) -> [Int64] {
+        let index: Int? = cachedPrimes.firstIndex { $0 >= upperBound }
+        guard let upperIndex = index else { return [] }
+
+        return Array(cachedPrimes.prefix(upTo: upperIndex))
     }
 
     func save(record: MainPreviewModel, primes: [Int64]) {

@@ -12,6 +12,7 @@ import UIKit
 
 protocol DetailsPresentableListener: class {
     var previewModel: MainPreviewModel { get }
+    var primes: [Int64] { get }
 
     func onDoneAction()
 }
@@ -24,29 +25,36 @@ final class DetailsViewController: UIViewController, DetailsPresentable, Details
     @IBOutlet weak var upperBoundLabel: UILabel!
     @IBOutlet weak var threadsCountLabel: UILabel!
     @IBOutlet weak var elapsedTimeLabel: UILabel!
-    //@IBOutlet weak var tabelView: UITableView! // for previewCell
-    @IBOutlet weak var tabelView: UITableView!
+    //@IBOutlet weak var tableView: UITableView! // for previewCell
+    @IBOutlet weak var primesTableView: UITableView!
 
     weak var listener: DetailsPresentableListener?
+    private var primesDataSource = DataSourceProvider<Int64, DetailsPrimeCell>(items: [])
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        setupTableView()
+        setupTableViews()
     }
 
-    private func setupTableView() {
-//        tabelView.registerReusableCell(cell: MainPreviewCell.self)
-//        tabelView.dataSource = self
-//        tabelView.tableFooterView = UIView()
-
-        guard let record = listener?.previewModel else { return }
+    private func setupTableViews() {
+        guard
+          let record = listener?.previewModel,
+          let primes = listener?.primes
+          else {
+            return
+        }
 
         startTimeLabel.text = #"Start time: \#(record.startTime.beautyStyle)"#
         upperBoundLabel.text = #"Upper bound: \#(record.upperBound)"#
         threadsCountLabel.text = #"Threads count: \#(record.threadsCount)"#
         let elapsedTime = getFormatted(elapsedTime: round(record.elapsedTime * 1000) / 1000)
         elapsedTimeLabel.text = #"Elapsed time: \#(elapsedTime)"#
+
+        primesTableView.registerReusableCell(cell: DetailsPrimeCell.self)
+        primesDataSource.add(items: primes)
+        primesTableView.dataSource = primesDataSource
+        primesTableView.tableFooterView = UIView()
     }
 }
 

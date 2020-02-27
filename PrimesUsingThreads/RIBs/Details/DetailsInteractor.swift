@@ -28,7 +28,7 @@ final class DetailsInteractor: PresentableInteractor<DetailsPresentable>, Detail
     weak var listener: DetailsListener?
 
     private(set) var previewModel: MainPreviewModel
-    private let primes: [Int64]
+    private(set) var primes: [Int64]
 
     init(presenter: DetailsPresentable,
          previewModel: MainPreviewModel,

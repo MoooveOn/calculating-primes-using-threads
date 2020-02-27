@@ -14,6 +14,7 @@
 		7241C5742407326000BF8FF8 /* DetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7241C56F2407326000BF8FF8 /* DetailsViewController.xib */; };
 		72438E8F24081DAF00C7F938 /* MainComponent+Details.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72438E8E24081DAF00C7F938 /* MainComponent+Details.swift */; };
 		72438E9124082EDF00C7F938 /* DetailsPrimeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72438E9024082EDF00C7F938 /* DetailsPrimeCell.xib */; };
+		72438E942408694D00C7F938 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72438E932408694D00C7F938 /* DataManager.swift */; };
 		724400F024047D12008885D0 /* Primes.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 724400EE24047D12008885D0 /* Primes.xcdatamodeld */; };
 		724400F224047F68008885D0 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724400F124047F68008885D0 /* CoreDataStack.swift */; };
 		7256151524055772002B2CDC /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7256151424055772002B2CDC /* CoreDataService.swift */; };
@@ -35,6 +36,8 @@
 		72AFAAED240163F50020507E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72AFAAEC240163F50020507E /* AppDelegate.swift */; };
 		72AFAAF4240163F60020507E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 72AFAAF3240163F60020507E /* Assets.xcassets */; };
 		72AFAAF7240163F60020507E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72AFAAF5240163F60020507E /* LaunchScreen.storyboard */; };
+		72DF3C0D24086B8700466043 /* DataSourceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DF3C0C24086B8700466043 /* DataSourceProvider.swift */; };
+		72DF3C0F2408730700466043 /* DetailsPrimeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DF3C0E2408730700466043 /* DetailsPrimeCell.swift */; };
 		72F8E5452401688D005E3A3F /* AppComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F8E5442401688D005E3A3F /* AppComponent.swift */; };
 		72F8E54B2401692C005E3A3F /* RootRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F8E5462401692C005E3A3F /* RootRouter.swift */; };
 		72F8E54C2401692C005E3A3F /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F8E5472401692C005E3A3F /* RootViewController.swift */; };
@@ -60,6 +63,7 @@
 		7241C56F2407326000BF8FF8 /* DetailsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailsViewController.xib; sourceTree = "<group>"; };
 		72438E8E24081DAF00C7F938 /* MainComponent+Details.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainComponent+Details.swift"; sourceTree = "<group>"; };
 		72438E9024082EDF00C7F938 /* DetailsPrimeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailsPrimeCell.xib; sourceTree = "<group>"; };
+		72438E932408694D00C7F938 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		724400EF24047D12008885D0 /* Primes.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Primes.xcdatamodel; sourceTree = "<group>"; };
 		724400F124047F68008885D0 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		7256151424055772002B2CDC /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
@@ -83,6 +87,8 @@
 		72AFAAF3240163F60020507E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		72AFAAF6240163F60020507E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		72AFAAF8240163F60020507E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		72DF3C0C24086B8700466043 /* DataSourceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSourceProvider.swift; sourceTree = "<group>"; };
+		72DF3C0E2408730700466043 /* DetailsPrimeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsPrimeCell.swift; sourceTree = "<group>"; };
 		72F8E5442401688D005E3A3F /* AppComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppComponent.swift; sourceTree = "<group>"; };
 		72F8E5462401692C005E3A3F /* RootRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootRouter.swift; sourceTree = "<group>"; };
 		72F8E5472401692C005E3A3F /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
@@ -147,6 +153,7 @@
 		72438E9224082EEB00C7F938 /* DetailsPrimeCell */ = {
 			isa = PBXGroup;
 			children = (
+				72DF3C0E2408730700466043 /* DetailsPrimeCell.swift */,
 				72438E9024082EDF00C7F938 /* DetailsPrimeCell.xib */,
 			);
 			path = DetailsPrimeCell;
@@ -197,6 +204,8 @@
 				72AE73DE2402B514003423FA /* ThreadPool.swift */,
 				72AE73DC2402B20D003423FA /* Date+Utils.swift */,
 				7256151B24057DC1002B2CDC /* TimeInterval+Utils.swift */,
+				72438E932408694D00C7F938 /* DataManager.swift */,
+				72DF3C0C24086B8700466043 /* DataSourceProvider.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -490,6 +499,7 @@
 				72F8E54D2401692C005E3A3F /* RootBuilder.swift in Sources */,
 				72AE73C824028C7F003423FA /* ConfigurableCell.swift in Sources */,
 				72AE73CA24028CB0003423FA /* ReusableCell.swift in Sources */,
+				72DF3C0D24086B8700466043 /* DataSourceProvider.swift in Sources */,
 				72F8E54C2401692C005E3A3F /* RootViewController.swift in Sources */,
 				72AFAAED240163F50020507E /* AppDelegate.swift in Sources */,
 				7241C5702407326000BF8FF8 /* DetailsRouter.swift in Sources */,
@@ -503,6 +513,8 @@
 				72F8E55D24016D33005E3A3F /* MainRouter.swift in Sources */,
 				72F8E55E24016D33005E3A3F /* MainViewController.swift in Sources */,
 				7278EA52240676780066F4D9 /* Prime+CoreDataClass.swift in Sources */,
+				72DF3C0F2408730700466043 /* DetailsPrimeCell.swift in Sources */,
+				72438E942408694D00C7F938 /* DataManager.swift in Sources */,
 				7256151C24057DC1002B2CDC /* TimeInterval+Utils.swift in Sources */,
 				724400F024047D12008885D0 /* Primes.xcdatamodeld in Sources */,
 				72AE73DF2402B514003423FA /* ThreadPool.swift in Sources */,
