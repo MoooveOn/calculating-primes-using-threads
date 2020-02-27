@@ -27,8 +27,18 @@ final class DetailsInteractor: PresentableInteractor<DetailsPresentable>, Detail
     weak var router: DetailsRouting?
     weak var listener: DetailsListener?
 
-    override init(presenter: DetailsPresentable) {
+    private(set) var previewModel: MainPreviewModel
+    private let primes: [Int64]
+
+    init(presenter: DetailsPresentable,
+         previewModel: MainPreviewModel,
+         primes: [Int64]) {
+
+        self.previewModel = previewModel
+        self.primes = primes
+
         super.init(presenter: presenter)
+        
         presenter.listener = self
     }
 

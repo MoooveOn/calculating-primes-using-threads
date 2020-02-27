@@ -13,6 +13,7 @@
 		7241C5732407326000BF8FF8 /* DetailsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7241C56E2407326000BF8FF8 /* DetailsInteractor.swift */; };
 		7241C5742407326000BF8FF8 /* DetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7241C56F2407326000BF8FF8 /* DetailsViewController.xib */; };
 		72438E8F24081DAF00C7F938 /* MainComponent+Details.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72438E8E24081DAF00C7F938 /* MainComponent+Details.swift */; };
+		72438E9124082EDF00C7F938 /* DetailsPrimeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72438E9024082EDF00C7F938 /* DetailsPrimeCell.xib */; };
 		724400F024047D12008885D0 /* Primes.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 724400EE24047D12008885D0 /* Primes.xcdatamodeld */; };
 		724400F224047F68008885D0 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724400F124047F68008885D0 /* CoreDataStack.swift */; };
 		7256151524055772002B2CDC /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7256151424055772002B2CDC /* CoreDataService.swift */; };
@@ -58,6 +59,7 @@
 		7241C56E2407326000BF8FF8 /* DetailsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsInteractor.swift; sourceTree = "<group>"; };
 		7241C56F2407326000BF8FF8 /* DetailsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailsViewController.xib; sourceTree = "<group>"; };
 		72438E8E24081DAF00C7F938 /* MainComponent+Details.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainComponent+Details.swift"; sourceTree = "<group>"; };
+		72438E9024082EDF00C7F938 /* DetailsPrimeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailsPrimeCell.xib; sourceTree = "<group>"; };
 		724400EF24047D12008885D0 /* Primes.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Primes.xcdatamodel; sourceTree = "<group>"; };
 		724400F124047F68008885D0 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		7256151424055772002B2CDC /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
@@ -124,6 +126,7 @@
 			isa = PBXGroup;
 			children = (
 				72438E8D24081D9900C7F938 /* Dependency */,
+				72438E9224082EEB00C7F938 /* DetailsPrimeCell */,
 				7241C56D2407326000BF8FF8 /* DetailsBuilder.swift */,
 				7241C56B2407326000BF8FF8 /* DetailsRouter.swift */,
 				7241C56E2407326000BF8FF8 /* DetailsInteractor.swift */,
@@ -139,6 +142,14 @@
 				72438E8E24081DAF00C7F938 /* MainComponent+Details.swift */,
 			);
 			path = Dependency;
+			sourceTree = "<group>";
+		};
+		72438E9224082EEB00C7F938 /* DetailsPrimeCell */ = {
+			isa = PBXGroup;
+			children = (
+				72438E9024082EDF00C7F938 /* DetailsPrimeCell.xib */,
+			);
+			path = DetailsPrimeCell;
 			sourceTree = "<group>";
 		};
 		724400ED24047C7E008885D0 /* CoreDataService */ = {
@@ -411,6 +422,7 @@
 				72AFAAF7240163F60020507E /* LaunchScreen.storyboard in Resources */,
 				72AFAAF4240163F60020507E /* Assets.xcassets in Resources */,
 				72AE73C024028A78003423FA /* MainPreviewCell.xib in Resources */,
+				72438E9124082EDF00C7F938 /* DetailsPrimeCell.xib in Resources */,
 				72F8E54F2401692C005E3A3F /* RootViewController.xib in Resources */,
 				72F8E56124016D33005E3A3F /* MainViewController.xib in Resources */,
 				7241C5742407326000BF8FF8 /* DetailsViewController.xib in Resources */,
@@ -642,11 +654,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YT28MT87R5;
 				INFOPLIST_FILE = "$(SRCROOT)/PrimesUsingThreads/Resources/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = ps.primes;
+				PRODUCT_BUNDLE_IDENTIFIER = ps.primes.threads;
 				PRODUCT_NAME = Primes;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -661,11 +674,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YT28MT87R5;
 				INFOPLIST_FILE = "$(SRCROOT)/PrimesUsingThreads/Resources/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = ps.primes;
+				PRODUCT_BUNDLE_IDENTIFIER = ps.primes.threads;
 				PRODUCT_NAME = Primes;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

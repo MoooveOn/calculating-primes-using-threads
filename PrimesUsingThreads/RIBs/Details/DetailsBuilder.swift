@@ -21,7 +21,7 @@ final class DetailsComponent: Component<DetailsDependency> {
 // MARK: - Builder
 
 protocol DetailsBuildable: Buildable {
-    func build(withListener listener: DetailsListener) -> DetailsRouting
+    func build(withListener listener: DetailsListener, previewModel: MainPreviewModel, primes: [Int64]) -> DetailsRouting
 }
 
 final class DetailsBuilder: Builder<DetailsDependency>, DetailsBuildable {
@@ -30,10 +30,10 @@ final class DetailsBuilder: Builder<DetailsDependency>, DetailsBuildable {
         super.init(dependency: dependency)
     }
 
-    func build(withListener listener: DetailsListener) -> DetailsRouting {
+    func build(withListener listener: DetailsListener, previewModel: MainPreviewModel, primes: [Int64]) -> DetailsRouting {
         let component = DetailsComponent(dependency: dependency)
         let viewController = DetailsViewController()
-        let interactor = DetailsInteractor(presenter: viewController)
+        let interactor = DetailsInteractor(presenter: viewController, previewModel: previewModel, primes: primes)
         interactor.listener = listener
         return DetailsRouter(interactor: interactor, viewController: viewController)
     }

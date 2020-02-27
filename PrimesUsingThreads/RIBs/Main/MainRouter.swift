@@ -35,7 +35,7 @@ final class MainRouter: ViewableRouter<MainInteractable, MainViewControllable>, 
     private let detailsBuilder: DetailsBuildable
 
     func routeToDetails(with previewModel: MainPreviewModel, primes: [Int64]) {
-        let rib = detailsBuilder.build(withListener: interactor)
+        let rib = detailsBuilder.build(withListener: interactor, previewModel: previewModel, primes: primes)
         details = presentRIB(rib)
     }
 

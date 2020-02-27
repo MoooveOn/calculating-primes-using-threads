@@ -10,7 +10,8 @@ import RIBs
 import RxSwift
 
 protocol MainRouting: ViewableRouting {
-    // TODO: Declare methods the interactor can invoke to manage sub-tree via the router.
+    func routeToDetails(with previewModel: MainPreviewModel, primes: [Int64])
+    func routeFromDetails()
 }
 
 protocol MainPresentable: Presentable {
@@ -67,6 +68,16 @@ final class MainInteractor: PresentableInteractor<MainPresentable>, MainInteract
 // MARK: - MainPresentableListener
 
 extension MainInteractor: MainPresentableListener {
+    var cacheRecordsCount: Int { cacheRecords.count }
+
+    func cacheRecord(at index: Int) -> MainPreviewModel { cacheRecords[index] }
+
+    func onDetailsAction(index: Int) {
+        let record = cacheRecord(at: index)
+        let primes = coreDataService.getPrimes(upTo: record.upperBound)
+        router?.routeToDetails(with: record, primes: primes)
+    }
+
     func onStartButtonAction(upperBound: Int, threadsCount: Int) {
         calculatingPrimesService.calculatePrimesUsingThreadPoolUp(to: upperBound, threadCount: threadsCount, cachedPrimes: coreDataService.cachedPrimes)
     }
@@ -90,5 +101,13 @@ extension MainInteractor: CalculatingPrimesDelagate {
             self.presenter.insertRow(at: IndexPath(row: 0, section: 0))
             self.presenter.inProgress = false
         }
+    }
+}
+
+// MARK: - DetailsListener
+
+extension MainInteractor: DetailsListener {
+    func closeDetails() {
+        router?.routeFromDetails()
     }
 }
