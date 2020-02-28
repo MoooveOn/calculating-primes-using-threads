@@ -18,8 +18,10 @@ protocol MainPresentable: Presentable {
     var listener: MainPresentableListener? { get set }
     var inProgress: Bool { get set }
 
-    func cleanCacheFinished()
+    func progressView(isEnable: Bool)
+    func setProgressView(to: Double)
     func insertRow(at indexPath: IndexPath)
+    func cleanCacheFinished()
 }
 
 protocol MainListener: class {
@@ -80,6 +82,7 @@ extension MainInteractor: MainPresentableListener {
 
     func onStartButtonAction(upperBound: Int, threadsCount: Int) {
         calculatingPrimesService.calculatePrimesUsingThreadPoolUp(to: Int64(upperBound), threadCount: threadsCount, cachedPrimes: coreDataService.cachedPrimes)
+        presenter.progressView(isEnable: true)
     }
 
     func onCleanCacheButtonAction() {
@@ -92,13 +95,19 @@ extension MainInteractor: MainPresentableListener {
 // MARK: - CalculatingPrimesDelagate
 
 extension MainInteractor: CalculatingPrimesDelagate {
+    func didCompleteSubtask(portionSize: Double) {
+        presenter.setProgressView(to: portionSize)
+    }
+
     func taskCompleted(result: MainPreviewModel, primes: [Int64]) {
         coreDataService.save(record: result, primes: primes)
         cacheRecords.insert(result, at: 0)
 
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
+            
             self.presenter.insertRow(at: IndexPath(row: 0, section: 0))
+            self.presenter.progressView(isEnable: false)
             self.presenter.inProgress = false
         }
     }

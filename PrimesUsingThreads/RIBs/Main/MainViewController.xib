@@ -11,6 +11,8 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MainViewController">
             <connections>
                 <outlet property="cleanCacheButton" destination="zNN-Ne-QaZ" id="Rb0-VG-8Xo"/>
+                <outlet property="progressLabel" destination="1uj-BP-Pfr" id="x58-Dd-UQq"/>
+                <outlet property="progressView" destination="dMb-UN-LR2" id="vnU-5j-Xg4"/>
                 <outlet property="startButton" destination="jaJ-Eh-d5M" id="bSN-zd-X22"/>
                 <outlet property="tableView" destination="ThS-HH-piS" id="w4Z-hP-jeQ"/>
                 <outlet property="threadsCountTextField" destination="mJh-XZ-fOm" id="ivG-xu-hrZ"/>
@@ -93,14 +95,16 @@
                         <action selector="startButtonTapped:" destination="-1" eventType="touchUpInside" id="k3P-7G-h09"/>
                     </connections>
                 </button>
-                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="dMb-UN-LR2">
-                    <rect key="frame" x="30" y="277" width="354" height="2"/>
+                <progressView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dMb-UN-LR2">
+                    <rect key="frame" x="30" y="277" width="364" height="2"/>
+                    <color key="progressTintColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="trackTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </progressView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Progress 35%" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1uj-BP-Pfr">
-                    <rect key="frame" x="164.5" y="294" width="85" height="16"/>
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1uj-BP-Pfr">
+                    <rect key="frame" x="207" y="294" width="0.0" height="0.0"/>
                     <color key="tintColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                    <color key="textColor" red="0.0" green="0.47455906869999998" blue="0.99203354119999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="textColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
@@ -117,7 +121,7 @@
                 <constraint firstItem="dMb-UN-LR2" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="30" id="fF2-q1-PZf"/>
                 <constraint firstItem="mJh-XZ-fOm" firstAttribute="top" secondItem="y72-jt-XK2" secondAttribute="bottom" constant="20" id="iz1-vt-ggC"/>
                 <constraint firstItem="zNN-Ne-QaZ" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="jtS-7p-c12"/>
-                <constraint firstAttribute="trailing" secondItem="dMb-UN-LR2" secondAttribute="trailing" constant="30" id="pCs-pR-ykS"/>
+                <constraint firstAttribute="trailing" secondItem="dMb-UN-LR2" secondAttribute="trailing" constant="20" id="pCs-pR-ykS"/>
                 <constraint firstItem="jaJ-Eh-d5M" firstAttribute="top" secondItem="mJh-XZ-fOm" secondAttribute="bottom" constant="20" id="qMm-fA-vVL"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>

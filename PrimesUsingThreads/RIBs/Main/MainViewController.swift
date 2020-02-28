@@ -108,13 +108,36 @@ extension MainViewController {
 // MARK: - MainPresentable
 
 extension MainViewController: MainPresentable {
-    func cleanCacheFinished() {
-        tableView.reloadData()
-        cleanCacheButton.stopAnimation(animationStyle: .normal, revertAfterDelay: 0.0, completion: nil)
+    func progressView(isEnable: Bool) {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+
+            self.progressView.isHidden = !isEnable
+            self.progressLabel.isHidden = !isEnable
+
+            if !isEnable {
+                self.progressView.progress = 0.0
+                self.progressLabel.text = ""
+            }
+        }
+    }
+
+    func setProgressView(to: Double) {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+
+            self.progressView.progress = Float(to)
+            self.progressLabel.text = #"Progress \#(round(to * 1000) / 10)%"#
+        }
     }
 
     func insertRow(at indexPath: IndexPath) {
         tableView.insertRows(at: [indexPath], with: .automatic)
+    }
+
+    func cleanCacheFinished() {
+        tableView.reloadData()
+        cleanCacheButton.stopAnimation(animationStyle: .normal, revertAfterDelay: 0.0, completion: nil)
     }
 }
 
