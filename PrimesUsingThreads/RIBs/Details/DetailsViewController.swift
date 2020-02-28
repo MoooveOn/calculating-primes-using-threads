@@ -34,22 +34,22 @@ final class DetailsViewController: UIViewController, DetailsPresentable, Details
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        setupTableViews()
+        setupPreviewInfo()
+        setupTableView()
     }
 
-    private func setupTableViews() {
-        guard
-          let record = listener?.previewModel,
-          let primes = listener?.primes
-          else {
-            return
-        }
+    private func setupPreviewInfo() {
+        guard let record = listener?.previewModel else { return }
 
         startTimeLabel.text = #"Start time: \#(record.startTime.beautyStyle)"#
         upperBoundLabel.text = #"Upper bound: \#(record.upperBound)"#
         threadsCountLabel.text = #"Threads count: \#(record.threadsCount)"#
         let elapsedTime = getFormatted(elapsedTime: round(record.elapsedTime * 1000) / 1000)
         elapsedTimeLabel.text = #"Elapsed time: \#(elapsedTime)"#
+    }
+
+    private func setupTableView() {
+        guard let primes = listener?.primes else { return }
 
         primesTableView.registerReusableCell(cell: DetailsPrimeCell.self)
         primesDataSource.add(items: primes)
@@ -63,30 +63,5 @@ final class DetailsViewController: UIViewController, DetailsPresentable, Details
 extension DetailsViewController {
     @IBAction func doneTapped(_ sender: Any) {
         listener?.onDoneAction()
-    }
-}
-
-// MARK: - UITableViewDataSource
-
-extension DetailsViewController: UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int { 1 }
-
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { 1 }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard
-          let cell = tableView.dequeueReusableCell(withIdentifier: MainPreviewCell.reuseIdentifier, for: indexPath) as? MainPreviewCell,
-          let record = listener?.previewModel
-          else {
-            return UITableViewCell()
-        }
-
-        cell.configure(record, at: indexPath)
-
-        return cell
-    }
-
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
     }
 }

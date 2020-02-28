@@ -79,7 +79,7 @@ extension MainInteractor: MainPresentableListener {
     }
 
     func onStartButtonAction(upperBound: Int, threadsCount: Int) {
-        calculatingPrimesService.calculatePrimesUsingThreadPoolUp(to: upperBound, threadCount: threadsCount, cachedPrimes: coreDataService.cachedPrimes)
+        calculatingPrimesService.calculatePrimesUsingThreadPoolUp(to: Int64(upperBound), threadCount: threadsCount, cachedPrimes: coreDataService.cachedPrimes)
     }
 
     func onCleanCacheButtonAction() {

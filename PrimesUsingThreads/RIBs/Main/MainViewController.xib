@@ -45,30 +45,39 @@
                         <action selector="cleanCacheButtonTapped:" destination="-1" eventType="touchUpInside" id="C5V-FF-hU0"/>
                     </connections>
                 </button>
-                <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter upper bound" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="y72-jt-XK2">
-                    <rect key="frame" x="123" y="109" width="167" height="34"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter upper bound" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="y72-jt-XK2">
+                    <rect key="frame" x="122" y="107" width="170" height="35"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="35" id="7Ry-al-vYr"/>
+                        <constraint firstAttribute="width" constant="170" id="eTJ-JP-Q2V"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                 </textField>
-                <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter count of threads" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mJh-XZ-fOm">
-                    <rect key="frame" x="123" y="163" width="167" height="34"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter count of threads" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mJh-XZ-fOm">
+                    <rect key="frame" x="122" y="162" width="170" height="35"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="170" id="HZC-ga-7X5"/>
+                        <constraint firstAttribute="height" constant="35" id="XUw-Yh-dpY"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                 </textField>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="insetGrouped" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="ThS-HH-piS">
-                    <rect key="frame" x="0.0" y="280" width="414" height="590"/>
+                    <rect key="frame" x="0.0" y="323" width="414" height="547"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <color key="separatorColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <inset key="separatorInset" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
                 </tableView>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jaJ-Eh-d5M" customClass="TransitionButton" customModule="TransitionButton">
-                    <rect key="frame" x="123" y="220" width="167" height="40"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jaJ-Eh-d5M" customClass="TransitionButton" customModule="TransitionButton">
+                    <rect key="frame" x="122" y="217" width="170" height="40"/>
                     <color key="backgroundColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="170" id="1Pk-6t-AYu"/>
+                        <constraint firstAttribute="height" constant="40" id="ePE-g4-8Ra"/>
+                    </constraints>
                     <state key="normal" title="Start">
                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
@@ -84,11 +93,32 @@
                         <action selector="startButtonTapped:" destination="-1" eventType="touchUpInside" id="k3P-7G-h09"/>
                     </connections>
                 </button>
+                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="dMb-UN-LR2">
+                    <rect key="frame" x="30" y="277" width="354" height="2"/>
+                </progressView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Progress 35%" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1uj-BP-Pfr">
+                    <rect key="frame" x="164.5" y="294" width="85" height="16"/>
+                    <color key="tintColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="textColor" red="0.0" green="0.47455906869999998" blue="0.99203354119999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
+                <constraint firstItem="y72-jt-XK2" firstAttribute="top" secondItem="zNN-Ne-QaZ" secondAttribute="bottom" constant="30" id="A31-kr-CfU"/>
+                <constraint firstItem="1uj-BP-Pfr" firstAttribute="top" secondItem="dMb-UN-LR2" secondAttribute="bottom" constant="15" id="KQJ-bt-6fQ"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="zNN-Ne-QaZ" secondAttribute="trailing" constant="20" id="NlS-nN-hKU"/>
+                <constraint firstItem="1uj-BP-Pfr" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Y68-Ml-hpN"/>
+                <constraint firstItem="jaJ-Eh-d5M" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="a1d-gi-cmo"/>
+                <constraint firstItem="dMb-UN-LR2" firstAttribute="top" secondItem="jaJ-Eh-d5M" secondAttribute="bottom" constant="20" id="eT9-f7-sBr"/>
+                <constraint firstItem="mJh-XZ-fOm" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="eXw-C3-d9Z"/>
+                <constraint firstItem="y72-jt-XK2" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="eiJ-ne-Ghy"/>
+                <constraint firstItem="dMb-UN-LR2" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="30" id="fF2-q1-PZf"/>
+                <constraint firstItem="mJh-XZ-fOm" firstAttribute="top" secondItem="y72-jt-XK2" secondAttribute="bottom" constant="20" id="iz1-vt-ggC"/>
                 <constraint firstItem="zNN-Ne-QaZ" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="jtS-7p-c12"/>
+                <constraint firstAttribute="trailing" secondItem="dMb-UN-LR2" secondAttribute="trailing" constant="30" id="pCs-pR-ykS"/>
+                <constraint firstItem="jaJ-Eh-d5M" firstAttribute="top" secondItem="mJh-XZ-fOm" secondAttribute="bottom" constant="20" id="qMm-fA-vVL"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <point key="canvasLocation" x="137.68115942028987" y="153.34821428571428"/>

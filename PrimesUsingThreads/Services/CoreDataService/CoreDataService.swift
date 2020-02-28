@@ -49,7 +49,7 @@ final class CoreDataService: CoreDataServicing {
             let records: [MainPreviewModel] = result.compactMap { (item: PrimesCalculating) -> MainPreviewModel? in
                 MainPreviewModel(startTime: item.startTime ?? Date(),
                                  upperBound: item.upperBound,
-                                 threadsCount: item.threadsCount,
+                                 threadsCount: Int(item.threadsCount),
                                  elapsedTime: item.elapsedTime)
             }
 
@@ -75,7 +75,7 @@ final class CoreDataService: CoreDataServicing {
     }
 
     func getPrimes(upTo upperBound: Int64) -> [Int64] {
-        let index: Int? = cachedPrimes.firstIndex { $0 >= upperBound }
+        let index: Int? = cachedPrimes.firstIndex { $0 >= upperBound } ?? cachedPrimes.count
         guard let upperIndex = index else { return [] }
 
         return Array(cachedPrimes.prefix(upTo: upperIndex))
@@ -86,13 +86,13 @@ final class CoreDataService: CoreDataServicing {
             let newRecord = PrimesCalculating(context: context)
             newRecord.startTime = record.startTime
             newRecord.upperBound = record.upperBound
-            newRecord.threadsCount = record.threadsCount
+            newRecord.threadsCount = Int16(record.threadsCount)
             newRecord.elapsedTime = record.elapsedTime
 
             do {
                 try context.save()
             } catch let error as NSError {
-                print("Unresolved error during saving managed object context: \(error), \(error.userInfo)")
+                print("⚡️ Unresolved error during saving managed object context: \(error), \(error.userInfo)")
             }
         }
 
@@ -123,6 +123,7 @@ final class CoreDataService: CoreDataServicing {
         do {
             let context = coreDataStack.viewContext
             try context.execute(batchDeleteRequest)
+            cachedPrimes.removeAll()
         } catch let error as NSError {
             print("Error occurred: \(error.localizedDescription)")
         }

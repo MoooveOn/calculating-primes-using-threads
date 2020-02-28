@@ -34,6 +34,8 @@ final class MainViewController: UIViewController, MainViewControllable {
     @IBOutlet private weak var upperBoundTextField: UITextField!
     @IBOutlet private weak var threadsCountTextField: UITextField!
     @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet private weak var progressView: UIProgressView!
+    @IBOutlet private weak var progressLabel: UILabel!
 
     // MARK: Life cycle
 
