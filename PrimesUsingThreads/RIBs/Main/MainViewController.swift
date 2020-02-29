@@ -36,6 +36,7 @@ final class MainViewController: UIViewController, MainViewControllable {
     @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var progressView: UIProgressView!
     @IBOutlet private weak var progressLabel: UILabel!
+    @IBOutlet private weak var loadingView: UIView!
 
     // MARK: Life cycle
 
@@ -43,6 +44,12 @@ final class MainViewController: UIViewController, MainViewControllable {
         super.viewDidLoad()
 
         setupTableView()
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+
+        loadingView.isHidden = true
     }
 
     private func setupTableView() {
@@ -161,6 +168,7 @@ extension MainViewController {
 
 extension MainViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        loadingView.isHidden = false
         listener?.onDetailsAction(index: indexPath.row)
     }
 }
