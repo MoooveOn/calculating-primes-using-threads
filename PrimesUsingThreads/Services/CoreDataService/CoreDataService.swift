@@ -100,7 +100,7 @@ final class CoreDataService: CoreDataServicing {
         coreDataStack.persistentContainer.performBackgroundTask { [weak self] context in
             guard let self = self else { return }
 
-            let maxPrime: Int64 = self.cachedPrimes.last ?? 2
+            let maxPrime: Int64 = self.cachedPrimes.last ?? 1
             for prime in primes {
                 if prime > maxPrime {
                     let newItem = Prime(context: context)
@@ -118,16 +118,22 @@ final class CoreDataService: CoreDataServicing {
     }
 
     func cleanCache() {
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: PrimesCalculating.entityName)
-        let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+        let recordsFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: PrimesCalculating.entityName)
+        let deleteRecordsRequest = NSBatchDeleteRequest(fetchRequest: recordsFetchRequest)
+        let primesFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: Prime.entityName)
+        let deletePrimesRequest = NSBatchDeleteRequest(fetchRequest: primesFetchRequest)
 
-        do {
-            let context = coreDataStack.viewContext
-            try context.execute(batchDeleteRequest)
-            cachedPrimes.removeAll()
-            maxCachedUpperBound = 0
-        } catch let error as NSError {
-            print("Error occurred: \(error.localizedDescription)")
+        coreDataStack.persistentContainer.performBackgroundTask { [weak self] context in
+            guard let self = self else { return }
+
+            do {
+                try context.execute(deleteRecordsRequest)
+                try context.execute(deletePrimesRequest)
+                self.cachedPrimes.removeAll()
+                self.maxCachedUpperBound = 0
+            } catch let error as NSError {
+                print("Error occurred: \(error.localizedDescription)")
+            }
         }
     }
 }

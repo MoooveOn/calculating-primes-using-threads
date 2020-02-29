@@ -89,7 +89,7 @@ final class CalculatingPrimesService: CalculatingPrimesServicing {
 
         var start: Int64 = 1
         if !cachedPrimes.isEmpty {
-            start = cachedPrimes[cachedPrimes.count - 1] + 1
+            start = maxCachedUpperBound
             add(cachedPrimes: cachedPrimes)
         }
 
