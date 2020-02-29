@@ -80,8 +80,8 @@ extension MainInteractor: MainPresentableListener {
         router?.routeToDetails(with: record, primes: primes)
     }
 
-    func onStartButtonAction(upperBound: Int, threadsCount: Int) {
-        calculatingPrimesService.calculatePrimesUsingThreadPoolUp(to: Int64(upperBound), threadCount: threadsCount, cachedPrimes: coreDataService.cachedPrimes)
+    func onStartButtonAction(upperBound: Int, threadCount: Int) {
+        calculatingPrimesService.calculatePrimesUsingThreadPoolUp(to: Int64(upperBound), threadCount: threadCount, cachedPrimes: coreDataService.cachedPrimes)
         presenter.progressView(isEnable: true)
     }
 

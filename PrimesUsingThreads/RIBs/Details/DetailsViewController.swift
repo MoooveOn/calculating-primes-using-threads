@@ -23,7 +23,7 @@ final class DetailsViewController: UIViewController, DetailsPresentable, Details
 
     @IBOutlet weak var startTimeLabel: UILabel!
     @IBOutlet weak var upperBoundLabel: UILabel!
-    @IBOutlet weak var threadsCountLabel: UILabel!
+    @IBOutlet weak var threadCountLabel: UILabel!
     @IBOutlet weak var elapsedTimeLabel: UILabel!
     //@IBOutlet weak var tableView: UITableView! // for previewCell
     @IBOutlet weak var primesTableView: UITableView!
@@ -43,7 +43,7 @@ final class DetailsViewController: UIViewController, DetailsPresentable, Details
 
         startTimeLabel.text = #"Start time: \#(record.startTime.beautyStyle)"#
         upperBoundLabel.text = #"Upper bound: \#(record.upperBound)"#
-        threadsCountLabel.text = #"Threads count: \#(record.threadsCount)"#
+        threadCountLabel.text = #"Threads count: \#(record.threadCount)"#
         let elapsedTime = getFormatted(elapsedTime: round(record.elapsedTime * 1000) / 1000)
         elapsedTimeLabel.text = #"Elapsed time: \#(elapsedTime)"#
     }

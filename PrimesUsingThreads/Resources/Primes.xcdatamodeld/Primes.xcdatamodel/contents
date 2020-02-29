@@ -9,11 +9,11 @@
     <entity name="PrimesCalculating" representedClassName=".PrimesCalculating" syncable="YES">
         <attribute name="elapsedTime" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="startTime" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="threadsCount" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="threadCount" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="upperBound" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
     <elements>
-        <element name="PrimesCalculating" positionX="-63" positionY="-18" width="128" height="103"/>
         <element name="Prime" positionX="-63" positionY="9" width="128" height="58"/>
+        <element name="PrimesCalculating" positionX="-63" positionY="-18" width="128" height="103"/>
     </elements>
 </model>

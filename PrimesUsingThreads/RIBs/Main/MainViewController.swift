@@ -16,7 +16,7 @@ protocol MainPresentableListener: class {
 
     func cacheRecord(at index: Int) -> MainPreviewModel
     func onDetailsAction(index: Int)
-    func onStartButtonAction(upperBound: Int, threadsCount: Int)
+    func onStartButtonAction(upperBound: Int, threadCount: Int)
     func onCleanCacheButtonAction()
 }
 
@@ -32,7 +32,7 @@ final class MainViewController: UIViewController, MainViewControllable {
     @IBOutlet private weak var startButton: TransitionButton!
     @IBOutlet private weak var cleanCacheButton: TransitionButton!
     @IBOutlet private weak var upperBoundTextField: UITextField!
-    @IBOutlet private weak var threadsCountTextField: UITextField!
+    @IBOutlet private weak var threadCountTextField: UITextField!
     @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var progressView: UIProgressView!
     @IBOutlet private weak var progressLabel: UILabel!
@@ -58,15 +58,15 @@ final class MainViewController: UIViewController, MainViewControllable {
             if inProgress {
                 startButton.startAnimation()
                 upperBoundTextField.isEnabled = false
-                threadsCountTextField.isEnabled = false
+                threadCountTextField.isEnabled = false
                 upperBoundTextField.backgroundColor = .lightGray
-                threadsCountTextField.backgroundColor = .lightGray
+                threadCountTextField.backgroundColor = .lightGray
             } else {
                 startButton.stopAnimation(animationStyle: .normal, revertAfterDelay: 0.0, completion: nil)
                 upperBoundTextField.isEnabled = true
-                threadsCountTextField.isEnabled = true
+                threadCountTextField.isEnabled = true
                 upperBoundTextField.backgroundColor = .white
-                threadsCountTextField.backgroundColor = .white
+                threadCountTextField.backgroundColor = .white
             }
         }
     }
@@ -75,15 +75,15 @@ final class MainViewController: UIViewController, MainViewControllable {
         return Int(upperBoundTextField.text ?? "") ?? -1
     }
 
-    fileprivate var threadsCount: Int {
-        return Int(threadsCountTextField.text ?? "") ?? 0
+    fileprivate var threadCount: Int {
+        return Int(threadCountTextField.text ?? "") ?? 0
     }
 
     fileprivate func checkConditions() -> Bool {
         var message: String = ""
         if upperBound < 0 {
             message = "Upper bound should be >= 0"
-        } else if !(1...10 ~= threadsCount) {
+        } else if !(1...10 ~= threadCount) {
             message = "Threads count should be in range (1...10)"
         } else {
             return true
@@ -148,7 +148,7 @@ extension MainViewController {
         guard checkConditions() else { return }
 
         inProgress = true
-        listener?.onStartButtonAction(upperBound: upperBound, threadsCount: threadsCount)
+        listener?.onStartButtonAction(upperBound: upperBound, threadCount: threadCount)
     }
 
     @IBAction func cleanCacheButtonTapped(_ sender: Any) {
