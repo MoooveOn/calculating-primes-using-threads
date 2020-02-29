@@ -38,6 +38,7 @@
 		72AFAAF7240163F60020507E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72AFAAF5240163F60020507E /* LaunchScreen.storyboard */; };
 		72DF3C0D24086B8700466043 /* DataSourceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DF3C0C24086B8700466043 /* DataSourceProvider.swift */; };
 		72DF3C0F2408730700466043 /* DetailsPrimeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DF3C0E2408730700466043 /* DetailsPrimeCell.swift */; };
+		72DF3C172409571100466043 /* UserDefaultsStorable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DF3C162409571100466043 /* UserDefaultsStorable.swift */; };
 		72F8E5452401688D005E3A3F /* AppComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F8E5442401688D005E3A3F /* AppComponent.swift */; };
 		72F8E54B2401692C005E3A3F /* RootRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F8E5462401692C005E3A3F /* RootRouter.swift */; };
 		72F8E54C2401692C005E3A3F /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F8E5472401692C005E3A3F /* RootViewController.swift */; };
@@ -89,6 +90,7 @@
 		72AFAAF8240163F60020507E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		72DF3C0C24086B8700466043 /* DataSourceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSourceProvider.swift; sourceTree = "<group>"; };
 		72DF3C0E2408730700466043 /* DetailsPrimeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsPrimeCell.swift; sourceTree = "<group>"; };
+		72DF3C162409571100466043 /* UserDefaultsStorable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsStorable.swift; sourceTree = "<group>"; };
 		72F8E5442401688D005E3A3F /* AppComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppComponent.swift; sourceTree = "<group>"; };
 		72F8E5462401692C005E3A3F /* RootRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootRouter.swift; sourceTree = "<group>"; };
 		72F8E5472401692C005E3A3F /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
@@ -206,6 +208,7 @@
 				7256151B24057DC1002B2CDC /* TimeInterval+Utils.swift */,
 				72438E932408694D00C7F938 /* DataManager.swift */,
 				72DF3C0C24086B8700466043 /* DataSourceProvider.swift */,
+				72DF3C162409571100466043 /* UserDefaultsStorable.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -497,6 +500,7 @@
 				72AE73DD2402B20D003423FA /* Date+Utils.swift in Sources */,
 				72AE73C224028A84003423FA /* MainPreviewCell.swift in Sources */,
 				72F8E54D2401692C005E3A3F /* RootBuilder.swift in Sources */,
+				72DF3C172409571100466043 /* UserDefaultsStorable.swift in Sources */,
 				72AE73C824028C7F003423FA /* ConfigurableCell.swift in Sources */,
 				72AE73CA24028CB0003423FA /* ReusableCell.swift in Sources */,
 				72DF3C0D24086B8700466043 /* DataSourceProvider.swift in Sources */,
@@ -674,7 +678,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = ps.primes.threads;
 				PRODUCT_NAME = Primes;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -694,7 +698,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = ps.primes.threads;
 				PRODUCT_NAME = Primes;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

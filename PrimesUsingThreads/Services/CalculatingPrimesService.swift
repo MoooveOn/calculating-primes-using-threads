@@ -31,13 +31,16 @@ final class CalculatingPrimesService: CalculatingPrimesServicing {
     private let dataLocker = NSLock()
 
     private var remainingTasks: Int64 = 0
-    private var primes: [Int64] = []
+    private var calculatedPrimes: [Int64] = []
 
-    private var start: UInt64?
-    private var end: UInt64?
+    private var startTime: UInt64!
+    private var finishTime: UInt64!
 
     private var upperBound: Int64 = 2
     private var threadsCount: Int = 1
+
+    @UserDefaultsStorable(key: "maxCachedUpperBound", defaultValue: 2)
+    private var maxCachedUpperBound: Int64
 
     private var progressValue: Double = 0.0 {
         didSet { delegates.forEach { $0.didCompleteSubtask(portionSize: progressValue) } }
@@ -49,20 +52,23 @@ final class CalculatingPrimesService: CalculatingPrimesServicing {
         delegates.append(delegate)
     }
 
-    private func hasCalculated(limit: Int64, threadCount: Int, cachedPrimes: [Int64]) -> Bool {
+    private func hasCalculated(limit: Int64, cachedPrimes: [Int64]) -> Bool {
         guard !cachedPrimes.isEmpty else { return false }
 
-        // TODO: use upper bound from user defaults here
-        let maxCached = cachedPrimes[cachedPrimes.count - 1]
-        if maxCached >= limit {
+        if maxCachedUpperBound >= limit {
+            let upperIndex: Int = cachedPrimes.firstIndex { $0 >= limit } ?? cachedPrimes.count
+            let primes: [Int64] = Array(cachedPrimes.prefix(upTo: upperIndex))
+            finishTime = DispatchTime.now().uptimeNanoseconds
+            let elapsedTime = Double((finishTime - startTime)) / 1_000_000_000.0
             let result = MainPreviewModel(startTime: Date(),
-                                          upperBound: upperBound,
-                                          threadsCount: threadCount,
-                                          elapsedTime: 0.0)
+                                          upperBound: limit,
+                                          threadsCount: 0,
+                                          elapsedTime: elapsedTime)
             delegates.forEach {
-                $0.taskCompleted(result: result, primes: [])
+                $0.taskCompleted(result: result, primes: primes)
             }
-
+            resetState()
+            
             return true
         }
 
@@ -70,16 +76,17 @@ final class CalculatingPrimesService: CalculatingPrimesServicing {
     }
 
     func calculatePrimesUsingThreadPoolUp(to limit: Int64, threadCount: Int, cachedPrimes: [Int64]) {
+        startTime = DispatchTime.now().uptimeNanoseconds
+
         guard
           !isBusy,
-          !hasCalculated(limit: limit, threadCount: threadCount, cachedPrimes: cachedPrimes)
+          !hasCalculated(limit: limit, cachedPrimes: cachedPrimes)
           else {
             return
         }
 
         isBusy = true
 
-        // TODO: fix this logic
         var start: Int64 = 1
         if !cachedPrimes.isEmpty {
             start = cachedPrimes[cachedPrimes.count - 1] + 1
@@ -94,7 +101,7 @@ final class CalculatingPrimesService: CalculatingPrimesServicing {
 
     private func add(cachedPrimes: [Int64]) {
         dataLocker.lock()
-        primes.append(contentsOf: cachedPrimes)
+        calculatedPrimes.append(contentsOf: cachedPrimes)
         dataLocker.unlock()
     }
 
@@ -102,13 +109,13 @@ final class CalculatingPrimesService: CalculatingPrimesServicing {
         let task = { [weak self] in
             guard let self = self else { return }
 
-            self.start = DispatchTime.now().uptimeNanoseconds
+            self.upperBound = Int64(limit)
+
+            self.threadsCount = threadCount
             self.threadPool = ThreadPool(threadCount: threadCount, threadPriority: 1.0)
 
             let chunkSize: Int64 = 100;
             self.chunks = (limit - startNumber) / chunkSize;
-            self.upperBound = Int64(limit)
-            self.threadsCount = threadCount
 
             for i in 0..<self.chunks {
                 let chunkStart = startNumber + i * chunkSize;
@@ -130,7 +137,7 @@ final class CalculatingPrimesService: CalculatingPrimesServicing {
 
     private func addData(_ portion: [Int64]) {
         dataLocker.lock()
-        primes.append(contentsOf: portion)
+        calculatedPrimes.append(contentsOf: portion)
         remainingTasks -= 1
         progressValue += 1.0 / Double(chunks)
         checkCompletion()
@@ -140,20 +147,28 @@ final class CalculatingPrimesService: CalculatingPrimesServicing {
     private func checkCompletion() {
         guard remainingTasks == 0 else { return }
 
-        end = DispatchTime.now().uptimeNanoseconds
+        finishTime = DispatchTime.now().uptimeNanoseconds
 
-        let elapsedTime = Double((end! - start!)) / 1_000_000_000.0
+        let elapsedTime = Double((finishTime - startTime)) / 1_000_000_000.0
         let result = MainPreviewModel(startTime: Date(),
                                       upperBound: upperBound,
                                       threadsCount: threadsCount,
                                       elapsedTime: elapsedTime)
         delegates.forEach {
-            $0.taskCompleted(result: result, primes: primes)
+            $0.taskCompleted(result: result, primes: calculatedPrimes)
         }
 
-        primes.removeAll()
-        start = nil
-        end = nil
+        if upperBound > maxCachedUpperBound {
+            maxCachedUpperBound = upperBound
+        }
+
+        resetState()
+    }
+
+    private func resetState() {
+        calculatedPrimes.removeAll()
+        startTime = nil
+        finishTime = nil
         isBusy = false
         progressValue = 0.0
     }

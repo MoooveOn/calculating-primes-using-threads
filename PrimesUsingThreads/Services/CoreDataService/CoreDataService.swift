@@ -26,6 +26,9 @@ final class CoreDataService: CoreDataServicing {
     private var delegates: [CoreDataDelegate] = []
     private let coreDataStack: CoreDataStack = CoreDataStack.shared
     internal var cachedPrimes: [Int64] = []
+    
+    @UserDefaultsStorable(key: "maxCachedUpperBound", defaultValue: 2)
+    private var maxCachedUpperBound: Int64
 
     init() {
         fetchPrimes()
@@ -75,9 +78,7 @@ final class CoreDataService: CoreDataServicing {
     }
 
     func getPrimes(upTo upperBound: Int64) -> [Int64] {
-        let index: Int? = cachedPrimes.firstIndex { $0 >= upperBound } ?? cachedPrimes.count
-        guard let upperIndex = index else { return [] }
-
+        let upperIndex: Int = cachedPrimes.firstIndex { $0 >= upperBound } ?? cachedPrimes.count
         return Array(cachedPrimes.prefix(upTo: upperIndex))
     }
 
@@ -124,6 +125,7 @@ final class CoreDataService: CoreDataServicing {
             let context = coreDataStack.viewContext
             try context.execute(batchDeleteRequest)
             cachedPrimes.removeAll()
+            maxCachedUpperBound = 0
         } catch let error as NSError {
             print("Error occurred: \(error.localizedDescription)")
         }

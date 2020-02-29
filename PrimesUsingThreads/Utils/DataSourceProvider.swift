@@ -8,7 +8,9 @@
 
 import UIKit
 
-class DataSourceProvider<T, U>: NSObject, UITableViewDataSource where U: ReusableCell & ConfigurableCell & UITableViewCell  {
+typealias WorkingCell = ReusableCell & ConfigurableCell & UITableViewCell
+
+class DataSourceProvider<T, U>: NSObject, UITableViewDataSource where U: WorkingCell {
 
     private let dataManager: DataManager = DataManager<T>()
 
