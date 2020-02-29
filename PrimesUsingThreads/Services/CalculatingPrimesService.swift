@@ -193,16 +193,18 @@ final class CalculatingPrimesService: CalculatingPrimesServicing {
 }
 
 fileprivate func isPrime(number: Int64) -> Bool {
-    if (number == 2) {
+    if number < 2 {
+        return false
+    } else if (number == 2) {
         return true
     } else if (number % 2 == 0) {
         return false
     }
 
-    let upperBound: Int64 = number / 2
+    let upperBound: Int64 = Int64(sqrt(Double(number)) + 1)
     var divisor: Int64 = 3
-    while (divisor < upperBound) {
-        if (number % divisor == 0) {
+    while divisor <= upperBound {
+        if number % divisor == 0 {
             return false
         }
 
