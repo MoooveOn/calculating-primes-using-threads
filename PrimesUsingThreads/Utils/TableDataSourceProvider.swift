@@ -10,7 +10,7 @@ import UIKit
 
 typealias WorkingCell = ReusableCell & ConfigurableCell & UITableViewCell
 
-class DataSourceProvider<T, U>: NSObject, UITableViewDataSource where U: WorkingCell {
+class TableDataSourceProvider<T, U>: NSObject, UITableViewDataSource where U: WorkingCell {
 
     private let dataManager: DataManager = DataManager<T>()
 

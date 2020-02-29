@@ -19,36 +19,37 @@ protocol DetailsPresentableListener: class {
 
 final class DetailsViewController: UIViewController, DetailsPresentable, DetailsViewControllable {
 
+    private struct Defaults {
+        static let detailsCellHeight: CGFloat = 100
+    }
+
     // MARK: - IBOutlets
 
-    @IBOutlet weak var startTimeLabel: UILabel!
-    @IBOutlet weak var upperBoundLabel: UILabel!
-    @IBOutlet weak var threadsCountLabel: UILabel!
-    @IBOutlet weak var elapsedTimeLabel: UILabel!
-    //@IBOutlet weak var tableView: UITableView! // for previewCell
+    @IBOutlet weak var detailsTableView: UITableView! // for previewCell
     @IBOutlet weak var primesTableView: UITableView!
 
     weak var listener: DetailsPresentableListener?
-    private var primesDataSource = DataSourceProvider<Int64, DetailsPrimeCell>(items: [])
+    private let detailsDataSource = TableDataSourceProvider<MainPreviewModel, MainPreviewCell>(items: [])
+    private let primesDataSource = TableDataSourceProvider<Int64, DetailsPrimeCell>(items: [])
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        setupPreviewInfo()
-        setupTableView()
+        setupDetailsTableView()
+        setupPrimesTableView()
     }
 
-    private func setupPreviewInfo() {
+    private func setupDetailsTableView() {
         guard let record = listener?.previewModel else { return }
 
-        startTimeLabel.text = #"Start time: \#(record.startTime.beautyStyle)"#
-        upperBoundLabel.text = #"Upper bound: \#(record.upperBound)"#
-        threadsCountLabel.text = #"Threads count: \#(record.threadsCount)"#
-        let elapsedTime = getFormatted(elapsedTime: round(record.elapsedTime * 1000) / 1000)
-        elapsedTimeLabel.text = #"Elapsed time: \#(elapsedTime)"#
+        detailsTableView.registerReusableCell(cell: MainPreviewCell.self)
+        detailsDataSource.add(items: [record])
+        detailsTableView.dataSource = detailsDataSource
+        detailsTableView.rowHeight = Defaults.detailsCellHeight
+        detailsTableView.tableFooterView = UIView()
     }
 
-    private func setupTableView() {
+    private func setupPrimesTableView() {
         guard let primes = listener?.primes else { return }
 
         primesTableView.registerReusableCell(cell: DetailsPrimeCell.self)
