@@ -55,7 +55,7 @@
             <connections>
                 <outlet property="elapsedTimeLabel" destination="0hZ-7L-05C" id="dBG-rr-Lrw"/>
                 <outlet property="startTimeLabel" destination="Jb5-ju-Iip" id="PpV-We-Vqt"/>
-                <outlet property="threadCountLabel" destination="2As-E9-vvV" id="EQ5-KH-RWh"/>
+                <outlet property="threadsCountLabel" destination="2As-E9-vvV" id="EQ5-KH-RWh"/>
                 <outlet property="upperBoundLabel" destination="mFZ-g5-tGF" id="R9c-kS-36o"/>
             </connections>
             <point key="canvasLocation" x="140.57971014492756" y="205.91517857142856"/>

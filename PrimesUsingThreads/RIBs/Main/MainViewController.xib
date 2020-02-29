@@ -13,7 +13,7 @@
                 <outlet property="progressView" destination="dMb-UN-LR2" id="vnU-5j-Xg4"/>
                 <outlet property="startButton" destination="jaJ-Eh-d5M" id="bSN-zd-X22"/>
                 <outlet property="tableView" destination="ThS-HH-piS" id="w4Z-hP-jeQ"/>
-                <outlet property="threadCountTextField" destination="mJh-XZ-fOm" id="ivG-xu-hrZ"/>
+                <outlet property="threadsCountTextField" destination="mJh-XZ-fOm" id="ivG-xu-hrZ"/>
                 <outlet property="upperBoundTextField" destination="y72-jt-XK2" id="4Hg-Ps-rVt"/>
                 <outlet property="view" destination="iN0-l3-epB" id="jYO-eb-xeE"/>
             </connections>

@@ -52,7 +52,7 @@ final class CoreDataService: CoreDataServicing {
             let records: [MainPreviewModel] = result.compactMap { (item: PrimesCalculating) -> MainPreviewModel? in
                 MainPreviewModel(startTime: item.startTime ?? Date(),
                                  upperBound: item.upperBound,
-                                 threadCount: Int(item.threadCount),
+                                 threadsCount: Int(item.threadsCount),
                                  elapsedTime: item.elapsedTime)
             }
 
@@ -87,7 +87,7 @@ final class CoreDataService: CoreDataServicing {
             let newRecord = PrimesCalculating(context: context)
             newRecord.startTime = record.startTime
             newRecord.upperBound = record.upperBound
-            newRecord.threadCount = Int16(record.threadCount)
+            newRecord.threadsCount = Int16(record.threadsCount)
             newRecord.elapsedTime = record.elapsedTime
 
             do {

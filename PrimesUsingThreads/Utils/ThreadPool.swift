@@ -114,8 +114,8 @@ public func ==(lhs: ThreadPoolQueue, rhs: ThreadPoolQueue) -> Bool {
         }
     }
 
-    public init(threadCount: Int, threadPriority: Double) {
-        assert(threadCount > 0, "threadCount < 0")
+    public init(threadsCount: Int, threadPriority: Double) {
+        assert(threadsCount > 0, "threadsCount < 0")
 
         self.mutex = pthread_mutex_t()
         self.condition = pthread_cond_t()
@@ -124,7 +124,7 @@ public func ==(lhs: ThreadPoolQueue, rhs: ThreadPoolQueue) -> Bool {
 
         super.init()
 
-        for _ in 0 ..< threadCount {
+        for _ in 0 ..< threadsCount {
             let thread = Thread(target: ThreadPool.self, selector: #selector(ThreadPool.threadEntryPoint(_:)), object: self)
             thread.threadPriority = threadPriority
             self.threads.append(thread)

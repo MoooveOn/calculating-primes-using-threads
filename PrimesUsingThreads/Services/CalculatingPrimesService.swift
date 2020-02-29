@@ -15,16 +15,16 @@ protocol CalculatingPrimesDelagate {
 
 protocol CalculatingPrimesServicing {
     func addListener(_ delegate: CalculatingPrimesDelagate)
-    func calculatePrimesUsingThreadPoolUp(to limit: Int64, threadCount: Int, cachedPrimes: [Int64])
+    func calculatePrimesUsingThreadPoolUp(to limit: Int64, threadsCount: Int, cachedPrimes: [Int64])
 }
 
 final class CalculatingPrimesService: CalculatingPrimesServicing {
     private var delegates: [CalculatingPrimesDelagate] = []
     private var threadPool: ThreadPool!
     private var isBusy: Bool = false
-    private var chunks: Int64 = 0 {
+    private var chunksCount: Int64 = 0 {
         didSet {
-            remainingTasks = chunks
+            remainingTasks = chunksCount
         }
     }
 
@@ -33,11 +33,11 @@ final class CalculatingPrimesService: CalculatingPrimesServicing {
     private var remainingTasks: Int64 = 0
     private var calculatedPrimes: [Int64] = []
 
-    private var startTime: UInt64!
-    private var finishTime: UInt64!
+    private var startCalculationTime: UInt64!
+    private var finishCalculationTime: UInt64!
 
     private var upperBound: Int64 = 2
-    private var threadCount: Int = 0
+    private var threadsCount: Int = 0
 
     @UserDefaultsStorable(key: "maxCachedUpperBound", defaultValue: 2)
     private var maxCachedUpperBound: Int64
@@ -54,8 +54,8 @@ final class CalculatingPrimesService: CalculatingPrimesServicing {
         delegates.append(delegate)
     }
 
-    func calculatePrimesUsingThreadPoolUp(to limit: Int64, threadCount: Int, cachedPrimes: [Int64]) {
-        startTime = DispatchTime.now().uptimeNanoseconds
+    func calculatePrimesUsingThreadPoolUp(to limit: Int64, threadsCount: Int, cachedPrimes: [Int64]) {
+        startCalculationTime = DispatchTime.now().uptimeNanoseconds
         upperBound = limit
 
         guard
@@ -74,16 +74,15 @@ final class CalculatingPrimesService: CalculatingPrimesServicing {
             add(cachedPrimes: cachedPrimes)
         }
 
-        let newTask = prepareNewTask(startNumber: startNumber, threadCount: threadCount)
+        let newTask = prepareNewTask(startNumber: startNumber, threadsCount: threadsCount)
         DispatchQueue.global(qos: .userInitiated).async {
             newTask()
         }
     }
 
     private func isTooSmall() -> Bool {
-        guard upperBound < 10 else { return false }
+        guard upperBound <= 2 else { return false }
 
-        calculatedPrimes.append(contentsOf: [2, 3, 5, 7].filter { $0 < upperBound })
         notifyDelegatesOfCompletion()
 
         return true
@@ -110,28 +109,28 @@ final class CalculatingPrimesService: CalculatingPrimesServicing {
         dataLocker.unlock()
     }
 
-    private func prepareNewTask(startNumber: Int64, threadCount: Int) -> () -> () {
+    private func prepareNewTask(startNumber: Int64, threadsCount: Int) -> () -> () {
         let task = { [weak self] in
             guard let self = self else { return }
 
-            self.threadCount = threadCount
+            self.threadsCount = threadsCount
 
             var chunkSize: Int64 = 128;
-            self.chunks = (self.upperBound - startNumber) / chunkSize;
+            self.chunksCount = (self.upperBound - startNumber) / chunkSize;
 
-            while(self.chunks < self.threadCount && chunkSize > 1) {
+            while(self.chunksCount < self.threadsCount && chunkSize > 1) {
                 chunkSize /= 2
-                self.chunks = (self.upperBound - startNumber) / chunkSize;
+                self.chunksCount = (self.upperBound - startNumber) / chunkSize;
             }
 
-            if self.chunks < threadCount {
-                self.threadCount = Int(self.chunks)
+            if self.chunksCount < threadsCount {
+                self.threadsCount = Int(self.chunksCount)
             }
 
-            self.threadPool = ThreadPool(threadCount: self.threadCount, threadPriority: 1.0)
-            for i in 0..<self.chunks {
+            self.threadPool = ThreadPool(threadsCount: self.threadsCount, threadPriority: 1.0)
+            for i in 0..<self.chunksCount {
                 let chunkStart = startNumber + i * chunkSize;
-                let chunkEnd = i == (self.chunks - 1) ? self.upperBound : chunkStart + chunkSize;
+                let chunkEnd = i == (self.chunksCount - 1) ? self.upperBound : chunkStart + chunkSize;
                 self.threadPool.addTask(ThreadPoolTask({ _ in
                     var portion: [Int64] = []
                     for number in chunkStart..<chunkEnd {
@@ -151,7 +150,7 @@ final class CalculatingPrimesService: CalculatingPrimesServicing {
         dataLocker.lock()
         calculatedPrimes.append(contentsOf: portion)
         remainingTasks -= 1
-        progressValue += 1.0 / Double(chunks)
+        progressValue += 1.0 / Double(chunksCount)
         checkCompletion()
         dataLocker.unlock()
     }
@@ -166,12 +165,12 @@ final class CalculatingPrimesService: CalculatingPrimesServicing {
     }
 
     private func notifyDelegatesOfCompletion() {
-        finishTime = DispatchTime.now().uptimeNanoseconds
+        finishCalculationTime = DispatchTime.now().uptimeNanoseconds
 
-        let elapsedTime = Double((finishTime - startTime)) / 1_000_000_000.0
+        let elapsedTime = Double((finishCalculationTime - startCalculationTime)) / 1_000_000_000.0
         let result = MainPreviewModel(startTime: Date(),
                                       upperBound: upperBound,
-                                      threadCount: threadCount,
+                                      threadsCount: threadsCount,
                                       elapsedTime: elapsedTime)
         delegates.forEach {
             $0.taskCompleted(result: result, primes: calculatedPrimes)
@@ -181,11 +180,11 @@ final class CalculatingPrimesService: CalculatingPrimesServicing {
     }
 
     private func resetState() {
-        startTime = nil
-        finishTime = nil
-        chunks = 0
+        startCalculationTime = nil
+        finishCalculationTime = nil
+        chunksCount = 0
         upperBound = 0
-        threadCount = 0
+        threadsCount = 0
         threadPool = nil
         isBusy = false
         progressValue = 0.0

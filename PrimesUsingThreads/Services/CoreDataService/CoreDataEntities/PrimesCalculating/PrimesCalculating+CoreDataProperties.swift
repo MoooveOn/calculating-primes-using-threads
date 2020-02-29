@@ -19,6 +19,6 @@ extension PrimesCalculating {
 
     @NSManaged public var elapsedTime: Double
     @NSManaged public var startTime: Date?
-    @NSManaged public var threadCount: Int16
+    @NSManaged public var threadsCount: Int16
     @NSManaged public var upperBound: Int64
 }
