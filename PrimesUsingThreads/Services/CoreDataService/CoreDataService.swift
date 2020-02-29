@@ -127,10 +127,11 @@ final class CoreDataService: CoreDataServicing {
             guard let self = self else { return }
 
             do {
+                self.maxCachedUpperBound = 0
+                self.cachedPrimes.removeAll()
                 try context.execute(deleteRecordsRequest)
                 try context.execute(deletePrimesRequest)
-                self.cachedPrimes.removeAll()
-                self.maxCachedUpperBound = 0
+                try context.save()
             } catch let error as NSError {
                 print("Error occurred: \(error.localizedDescription)")
             }
