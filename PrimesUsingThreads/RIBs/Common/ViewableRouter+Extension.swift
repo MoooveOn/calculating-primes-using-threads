@@ -1,10 +1,3 @@
-//
-//  ViewableRouter+Extension.swift
-//  Empty_RIB
-//
-//  Created by Pavel Selivanov on 2/22/20.
-//  Copyright © 2020 Pavel Selivanov. All rights reserved.
-//
 
 import Foundation
 import RIBs
@@ -23,8 +16,6 @@ extension ViewableRouter {
 
     func presentRIB(_ child: ViewableRouting,
                     animated: Bool = true,
-                    modalPresentationStyle: UIModalPresentationStyle = .fullScreen,
-                    modalTransitionStyle: UIModalTransitionStyle = .crossDissolve,
                     completionBlock: (() -> Void)? = nil) -> ViewableRouting? {
         if let presentedViewController = viewControllable.uiviewController.presentedViewController {
             print("⚠️ Error: Unnable to present \(child) because \(viewControllable.uiviewController) alredy presented \(presentedViewController)")
@@ -33,8 +24,8 @@ extension ViewableRouter {
 
         attachChild(child)
         let childViewController = child.viewControllable.uiviewController
-        childViewController.modalTransitionStyle = modalTransitionStyle
-        childViewController.modalPresentationStyle = modalPresentationStyle
+        childViewController.modalTransitionStyle = .crossDissolve
+        childViewController.modalPresentationStyle = .fullScreen
 
         viewControllable.uiviewController.present(childViewController,
                                                   animated: animated,
