@@ -6,7 +6,7 @@
 //  Copyright © 2020 Pavel Selivanov. All rights reserved.
 //
 
-import UIKit
+import UIKit.UITableView
 
 typealias WorkingCell = ReusableCell & ConfigurableCell & UITableViewCell
 
