@@ -93,7 +93,7 @@ final class CoreDataService: CoreDataServicing {
             do {
                 try context.save()
             } catch let error as NSError {
-                print("⚡️ Unresolved error during saving managed object context: \(error), \(error.userInfo)")
+                print("Unresolved error during saving managed object context: \(error), \(error.userInfo)")
             }
         }
 

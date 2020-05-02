@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		721382772456A12A00FE740B /* RegistrableSupplementaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721382742456A12A00FE740B /* RegistrableSupplementaryView.swift */; };
+		721382782456A12A00FE740B /* ReusableSupplementaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721382752456A12A00FE740B /* ReusableSupplementaryView.swift */; };
+		721382792456A12A00FE740B /* ConfigurableSupplementaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721382762456A12A00FE740B /* ConfigurableSupplementaryView.swift */; };
 		7241C5702407326000BF8FF8 /* DetailsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7241C56B2407326000BF8FF8 /* DetailsRouter.swift */; };
 		7241C5712407326000BF8FF8 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7241C56C2407326000BF8FF8 /* DetailsViewController.swift */; };
 		7241C5722407326000BF8FF8 /* DetailsBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7241C56D2407326000BF8FF8 /* DetailsBuilder.swift */; };
@@ -57,6 +60,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		721382742456A12A00FE740B /* RegistrableSupplementaryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrableSupplementaryView.swift; sourceTree = "<group>"; };
+		721382752456A12A00FE740B /* ReusableSupplementaryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReusableSupplementaryView.swift; sourceTree = "<group>"; };
+		721382762456A12A00FE740B /* ConfigurableSupplementaryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigurableSupplementaryView.swift; sourceTree = "<group>"; };
 		7241C56B2407326000BF8FF8 /* DetailsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsRouter.swift; sourceTree = "<group>"; };
 		7241C56C2407326000BF8FF8 /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		7241C56D2407326000BF8FF8 /* DetailsBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsBuilder.swift; sourceTree = "<group>"; };
@@ -122,6 +128,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		721382732456A12A00FE740B /* SupplementaryView */ = {
+			isa = PBXGroup;
+			children = (
+				721382742456A12A00FE740B /* RegistrableSupplementaryView.swift */,
+				721382752456A12A00FE740B /* ReusableSupplementaryView.swift */,
+				721382762456A12A00FE740B /* ConfigurableSupplementaryView.swift */,
+			);
+			path = SupplementaryView;
+			sourceTree = "<group>";
+		};
 		723BBC8DECB2F5BC9009DEB1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -202,6 +218,7 @@
 			isa = PBXGroup;
 			children = (
 				72AE73C624028C64003423FA /* CellAbstractions */,
+				721382732456A12A00FE740B /* SupplementaryView */,
 				72AE73BA2401D058003423FA /* Atomic.swift */,
 				72AE73DE2402B514003423FA /* ThreadPool.swift */,
 				72AE73DC2402B20D003423FA /* Date+Utils.swift */,
@@ -492,6 +509,7 @@
 			files = (
 				72F8E54E2401692C005E3A3F /* RootInteractor.swift in Sources */,
 				72AE73E12403218B003423FA /* CalculatingPrimesService.swift in Sources */,
+				721382782456A12A00FE740B /* ReusableSupplementaryView.swift in Sources */,
 				7278EA40240674850066F4D9 /* PrimesCalculating+CoreDataClass.swift in Sources */,
 				72F8E5452401688D005E3A3F /* AppComponent.swift in Sources */,
 				72F8E54B2401692C005E3A3F /* RootRouter.swift in Sources */,
@@ -520,9 +538,11 @@
 				72DF3C0F2408730700466043 /* DetailsPrimeCell.swift in Sources */,
 				72438E942408694D00C7F938 /* DataManager.swift in Sources */,
 				7256151C24057DC1002B2CDC /* TimeInterval+Utils.swift in Sources */,
+				721382792456A12A00FE740B /* ConfigurableSupplementaryView.swift in Sources */,
 				724400F024047D12008885D0 /* Primes.xcdatamodeld in Sources */,
 				72AE73DF2402B514003423FA /* ThreadPool.swift in Sources */,
 				7241C5712407326000BF8FF8 /* DetailsViewController.swift in Sources */,
+				721382772456A12A00FE740B /* RegistrableSupplementaryView.swift in Sources */,
 				72AE73BB2401D058003423FA /* Atomic.swift in Sources */,
 				72F8E56024016D33005E3A3F /* MainInteractor.swift in Sources */,
 				7278EA41240674850066F4D9 /* PrimesCalculating+CoreDataProperties.swift in Sources */,
